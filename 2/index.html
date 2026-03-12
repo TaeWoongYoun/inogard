@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이노가드 | 전자구매 SaaS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafafa;
+  --white:#ffffff;
+  --black:#111111;
+  --gray-900:#1a1a1a;
+  --gray-700:#404040;
+  --gray-500:#737373;
+  --gray-400:#a3a3a3;
+  --gray-300:#d4d4d4;
+  --gray-200:#e5e5e5;
+  --gray-100:#f0f0f0;
+  --accent:#0055ff;
+  --accent-light:#e8efff;
+  --ebiz-color:#00b0b9;
+  --ebiz-light:#e6f8f9;
+  --font-en:'Outfit',sans-serif;
+  --font-kr:'Noto Sans KR','Outfit',sans-serif;
+  --ease:cubic-bezier(0.4,0,0.2,1);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-kr);background:var(--bg);color:var(--black);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* ====== NAV ====== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 3rem;height:64px;display:flex;align-items:center;justify-content:space-between;transition:all .4s var(--ease)}
+.nav.scrolled{background:rgba(250,250,250,.85);backdrop-filter:blur(20px) saturate(1.2);border-bottom:1px solid var(--gray-200)}
+.nav__logo{font-family:var(--font-en);font-weight:700;font-size:1.15rem;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:10px;letter-spacing:-.02em}
+.nav__logo-mark{width:28px;height:28px;background:var(--black);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:800;letter-spacing:.02em}
+.nav__links{display:flex;gap:2.5rem;list-style:none}
+.nav__links a{font-family:var(--font-en);color:var(--gray-500);text-decoration:none;font-size:.85rem;font-weight:500;transition:color .3s var(--ease)}
+.nav__links a:hover{color:var(--black)}
+.nav__cta{padding:8px 20px;background:var(--black);color:#fff;border:none;border-radius:8px;font-family:var(--font-en);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .3s var(--ease)}
+.nav__cta:hover{background:var(--gray-900);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+
+/* ====== HERO ====== */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 3rem;position:relative;overflow:hidden}
+.hero__inner{max-width:1200px;margin:0 auto;width:100%;padding:6rem 0 4rem}
+.hero__tag{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid var(--gray-200);border-radius:100px;font-family:var(--font-en);font-size:.75rem;font-weight:500;color:var(--gray-500);margin-bottom:2.5rem;letter-spacing:.04em;opacity:0;animation:fadeUp .7s var(--ease) .1s forwards}
+.hero__tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.hero__title{font-size:clamp(2.2rem,5.5vw,4rem);font-weight:700;line-height:1.35;letter-spacing:-.03em;margin-bottom:2rem;max-width:1200px;opacity:0;animation:fadeUp .8s var(--ease) .25s forwards}
+.hero__title em{font-style:normal;color:var(--accent)}
+.hero__desc{font-size:clamp(.95rem,1.6vw,1.08rem);color:var(--gray-500);line-height:1.85;max-width:560px;font-weight:400;margin-bottom:3rem;opacity:0;animation:fadeUp .8s var(--ease) .4s forwards}
+.hero__actions{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s var(--ease) .55s forwards;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-family:var(--font-en);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s var(--ease);text-decoration:none;letter-spacing:.01em}
+.btn--dark{background:var(--black);color:#fff;border:1.5px solid var(--black)}
+.btn--dark:hover{background:var(--gray-900);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.btn--outline{background:transparent;color:var(--black);border:1.5px solid var(--gray-300)}
+.btn--outline:hover{border-color:var(--black);background:var(--white)}
+.hero__deco{position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:480px;height:480px;border-radius:50%;border:1px solid var(--gray-200);opacity:0;animation:fadeScale 1.2s var(--ease) .6s forwards;pointer-events:none}
+.hero__deco::before{content:'';position:absolute;inset:40px;border-radius:50%;border:1px solid var(--gray-200)}
+.hero__deco::after{content:'';position:absolute;inset:80px;border-radius:50%;border:1px solid var(--gray-100)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeScale{from{opacity:0;transform:translateY(-50%) scale(.85)}to{opacity:.5;transform:translateY(-50%) scale(1)}}
+
+/* ====== DIVIDER ====== */
+.divider{max-width:1200px;margin:0 auto;padding:0 3rem}
+.divider__line{height:1px;background:var(--gray-200)}
+
+/* ====== SOLUTION SECTION ====== */
+.sol-section{padding:6rem 3rem;max-width:1200px;margin:0 auto}
+.sol-section__inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.sol-section__tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem}
+.sol-tag{display:inline-flex;align-items:center;gap:4px;padding:5px 14px;border-radius:100px;font-size:.75rem;font-weight:500;background:var(--white);border:1px solid var(--gray-200);box-shadow:0 1px 4px rgba(0,0,0,.04);color:var(--gray-500);letter-spacing:.01em}
+.sol-tag::before{content:'#';color:var(--gray-400);font-weight:600}
+.sol-section__name{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;letter-spacing:-.025em;margin-bottom:.5rem;line-height:1.3}
+.sol-section__sub{font-family:var(--font-en);font-size:.92rem;font-weight:700;margin-bottom:1.2rem;letter-spacing:.01em;color:var(--ebiz-color)}
+.sol-section__desc{color:var(--gray-500);font-size:.95rem;line-height:1.8;font-weight:400;margin-bottom:1.5rem}
+.sol-section__link{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-en);font-size:.85rem;font-weight:600;color:var(--black);text-decoration:none;transition:gap .3s var(--ease)}
+.sol-section__link:hover{gap:10px}
+
+/* ====== PHONE CHAT UI ====== */
+.phone{
+  width:320px;margin:0 auto;
+  background:var(--white);
+  border-radius:36px;
+  border:1px solid var(--gray-200);
+  box-shadow:0 20px 60px rgba(0,0,0,.08),0 2px 8px rgba(0,0,0,.04);
+  overflow:hidden;
+  position:relative;
+}
+.phone__notch{
+  width:120px;height:28px;
+  background:var(--bg);
+  border-radius:0 0 16px 16px;
+  margin:0 auto;
+  position:relative;z-index:2;
+}
+.phone__header{
+  padding:0 1.2rem .8rem;
+  display:flex;align-items:center;gap:10px;
+  border-bottom:1px solid var(--gray-100);
+}
+.phone__avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--ebiz-color);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-family:var(--font-en);font-size:.6rem;font-weight:800;
+  flex-shrink:0;
+}
+.phone__name{font-size:.82rem;font-weight:700;line-height:1.2}
+.phone__status{font-size:.65rem;color:var(--gray-400);font-weight:500}
+
+.phone__chat{
+  padding:1rem 1rem .8rem;
+  height:460px;
+  overflow-y:auto;
+  display:flex;flex-direction:column;gap:10px;
+  scrollbar-width:none;
+}
+.phone__chat::-webkit-scrollbar{display:none}
+
+.chat-msg{max-width:85%;animation:msgIn .4s var(--ease) both}
+.chat-msg--user{align-self:flex-end}
+.chat-msg--bot{align-self:flex-start}
+
+.chat-bubble{
+  padding:10px 14px;
+  font-size:.78rem;line-height:1.65;
+  border-radius:16px;
+  position:relative;
+}
+.chat-msg--user .chat-bubble{
+  background:var(--black);color:#fff;
+  border-bottom-right-radius:4px;
+  font-weight:500;
+}
+.chat-msg--bot .chat-bubble{
+  background:var(--gray-100);color:var(--gray-700);
+  border-bottom-left-radius:4px;
+}
+.chat-msg--highlight .chat-bubble{
+  background:linear-gradient(135deg,var(--ebiz-color),#009da5);
+  color:#fff;
+  border-bottom-left-radius:4px;
+}
+.chat-time{
+  font-size:.6rem;color:var(--gray-400);
+  margin-top:3px;
+  padding:0 4px;
+}
+.chat-msg--user .chat-time{text-align:right}
+
+.phone__input{
+  padding:.8rem 1rem;
+  border-top:1px solid var(--gray-100);
+  display:flex;align-items:center;gap:8px;
+}
+.phone__input-field{
+  flex:1;padding:8px 12px;
+  border:1px solid var(--gray-200);border-radius:20px;
+  font-size:.75rem;color:var(--gray-400);
+  background:var(--bg);
+  outline:none;
+}
+.phone__input-send{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--ebiz-color);border:none;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;
+}
+.phone__input-send svg{width:14px;height:14px}
+
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ====== LOGO SLIDER ====== */
+.logo-slider{overflow:hidden;padding:1.5rem 0;border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200);background:var(--white);height:70px;display:flex;align-items:center}
+.logo-slider__track{display:flex;gap:3rem;animation:logoScroll 30s linear infinite;white-space:nowrap;align-items:center}
+.logo-slider__item{flex-shrink:0;font-family:var(--font-kr);font-size:.82rem;font-weight:600;color:var(--gray-400);letter-spacing:.02em;display:flex;align-items:center;gap:6px;user-select:none}
+.logo-slider__item .dot{width:4px;height:4px;border-radius:50%;background:var(--gray-300)}
+@keyframes logoScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ====== STATS ====== */
+.stats{padding:6rem 3rem 7rem;background:var(--white);border-top:1px solid var(--gray-200);border-bottom:1px solid var(--gray-200)}
+.stats__inner{max-width:1200px;margin:0 auto}
+.stats__header{text-align:center;margin-bottom:4rem}
+.stats__label{font-family:var(--font-en);font-size:.75rem;font-weight:600;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:1rem}
+.stats__title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;letter-spacing:-.025em}
+.stats__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.stat__item{text-align:center;padding:2.5rem 1.5rem;position:relative}
+.stat__item:not(:last-child)::after{content:'';position:absolute;right:0;top:20%;height:60%;width:1px;background:var(--gray-200)}
+.stat__visual{height:48px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:1.2rem}
+.stat__bars{display:flex;gap:3px;align-items:flex-end;height:100%}
+.stat__bar{width:6px;border-radius:3px;transition:height 1.4s cubic-bezier(.34,1.56,.64,1)}
+.stat__bar[data-animated="false"]{height:3px !important}
+.stat__mini-dots{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center;width:80px;height:48px}
+.stat__dot{width:5px;height:5px;border-radius:50%;background:var(--gray-300);transition:all .6s var(--ease)}
+.stat__dot[data-animated="true"]{background:var(--accent)}
+.stat__progress{width:100%;max-width:120px;height:4px;background:var(--gray-100);border-radius:100px;overflow:hidden;align-self:center;margin:0 auto}
+.stat__progress-fill{height:100%;border-radius:100px;background:var(--black);transition:width 1.5s var(--ease);width:0}
+.stat__curve-wrap{width:120px;height:48px;margin:0 auto}
+.stat__number{font-family:var(--font-en);font-size:2.6rem;font-weight:800;color:var(--black);letter-spacing:-.03em;margin-bottom:.3rem;line-height:1}
+.stat__suffix{font-size:1.4rem;font-weight:600;color:var(--accent)}
+.stat__name{font-size:.82rem;color:var(--gray-400);font-weight:500}
+
+/* ====== FOOTER ====== */
+.footer{padding:3rem 3rem 2rem;max-width:1200px;margin:0 auto}
+.footer__top{display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;padding-bottom:2rem;border-bottom:1px solid var(--gray-200)}
+.footer__brand-logo{font-family:var(--font-en);font-weight:700;font-size:1rem;display:flex;align-items:center;gap:8px;margin-bottom:1rem;color:var(--black)}
+.footer__brand-logo .nav__logo-mark{width:22px;height:22px;font-size:.55rem;border-radius:5px}
+.footer__info{color:var(--gray-400);font-size:.78rem;line-height:2}
+.footer__right{display:flex;flex-direction:column;align-items:flex-end;gap:1.2rem}
+.footer__links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer__links a{color:var(--gray-500);text-decoration:none;font-size:.8rem;font-weight:500;transition:color .3s var(--ease)}
+.footer__links a:hover{color:var(--black)}
+.family-site{position:relative}
+.family-site__btn{display:flex;align-items:center;gap:6px;padding:8px 14px;border:1px solid var(--gray-200);border-radius:8px;background:var(--white);font-family:var(--font-en);font-size:.78rem;font-weight:600;color:var(--gray-700);cursor:pointer;transition:all .2s var(--ease);min-width:160px;justify-content:space-between}
+.family-site__btn:hover{border-color:var(--gray-300)}
+.family-site__btn svg{transition:transform .2s var(--ease)}
+.family-site.open .family-site__btn svg{transform:rotate(180deg)}
+.family-site__list{position:absolute;bottom:calc(100% + 6px);right:0;min-width:200px;background:var(--white);border:1px solid var(--gray-200);border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,.08);padding:6px;display:none;z-index:10}
+.family-site.open .family-site__list{display:block}
+.family-site__list a{display:block;padding:8px 12px;font-size:.8rem;color:var(--gray-700);text-decoration:none;border-radius:6px;transition:all .15s var(--ease);font-weight:500}
+.family-site__list a:hover{background:var(--bg);color:var(--black)}
+.family-site__list a span{font-size:.7rem;color:var(--gray-400);margin-left:4px}
+.footer__bottom{padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer__copy{color:var(--gray-400);font-size:.72rem;font-family:var(--font-en);letter-spacing:.02em}
+
+/* ====== MODAL ====== */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.4);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:2rem}
+.modal-overlay.active{display:flex}
+.modal{background:var(--white);border-radius:20px;padding:2.8rem;width:100%;max-width:480px;position:relative;animation:modalUp .35s var(--ease);box-shadow:0 24px 80px rgba(0,0,0,.12)}
+@keyframes modalUp{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal__close{position:absolute;top:1rem;right:1rem;width:32px;height:32px;border-radius:8px;border:1px solid var(--gray-200);background:var(--white);color:var(--gray-400);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s var(--ease)}
+.modal__close:hover{border-color:var(--black);color:var(--black)}
+.modal__title{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.3rem}
+.modal__desc{color:var(--gray-500);font-size:.88rem;margin-bottom:2rem;line-height:1.6}
+.form-group{margin-bottom:1rem}
+.form-group label{display:block;font-size:.78rem;font-weight:600;color:var(--gray-500);margin-bottom:.3rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 14px;background:var(--bg);border:1px solid var(--gray-200);border-radius:10px;font-family:var(--font-kr);font-size:.9rem;color:var(--black);outline:none;transition:all .25s var(--ease)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light)}
+.form-group textarea{resize:vertical;min-height:90px}
+.form-group select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:var(--bg)}
+.modal .btn--dark{width:100%;justify-content:center;margin-top:.5rem;padding:13px}
+
+/* ====== REVEAL ====== */
+.reveal{opacity:0;transform:translateY(32px);transition:all .7s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav__logo"><span class="nav__logo-mark">IG</span> inogard</a>
+  <ul class="nav__links">
+    <li><a href="#ebiz">eBiz4U</a></li>
+    <li><a href="#stats">Trust</a></li>
+  </ul>
+  <button class="nav__cta" onclick="openModal(event)">Contact us</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__deco"></div>
+  <div class="hero__inner">
+    <div class="hero__tag">Enterprise SaaS Platform</div>
+    <h1 class="hero__title">구매 비용의 절감,<br>전자입찰을 통한 <em>합리적인 구매업무</em> 수행으로<br>기업 원가를 혁신합니다.</h1>
+    <p class="hero__desc">대학교 및 중소기업을 중심으로 최적화된 SaaS 기반 전자구매 시스템을 제공합니다. 고객의 요구에 맞춘 정밀한 기술 구현과 선진 조달 환경을 통해 최고의 비즈니스 가치를 실현합니다.</p>
+    <div class="hero__actions">
+      <a href="https://www.inogard.co.kr/company.html" class="btn btn--outline" target="_blank">Company →</a>
+      <a href="#ebiz" class="btn btn--dark">Solution →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider__line"></div></div>
+
+<!-- eBiz4U Section with Phone Chat -->
+<section class="sol-section" id="ebiz">
+  <div class="sol-section__inner reveal">
+    <!-- LEFT: Text -->
+    <div class="sol-section__text">
+      <div class="sol-section__tags">
+        <span class="sol-tag">전자입찰</span>
+        <span class="sol-tag">전자계약</span>
+        <span class="sol-tag">세금계산서</span>
+        <span class="sol-tag">전자보증</span>
+        <span class="sol-tag">구매관리</span>
+      </div>
+      <h2 class="sol-section__name">최적의 전자조달 서비스</h2>
+      <p class="sol-section__sub">EBIZ4U</p>
+      <p class="sol-section__desc">약 120개 대학교 및 대학교 부속기관이 이용하는 이비즈포유는 전자견적/입찰을 통한 업체선정, 전자계약 체결, 전자세금계산서 교부 등의 전자구매플랫폼이며, 발주기관에 무상으로 제공됩니다.</p>
+      <a href="https://www.ebiz4u.co.kr" class="sol-section__link" target="_blank">
+        서비스 바로가기
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <!-- RIGHT: Phone Chat UI -->
+    <div style="display:flex;justify-content:center">
+      <div class="phone">
+        <div class="phone__notch"></div>
+        <div class="phone__header">
+          <div class="phone__avatar">E4U</div>
+          <div>
+            <div class="phone__name">eBiz4U 상담</div>
+            <div class="phone__status">온라인</div>
+          </div>
+        </div>
+        <div class="phone__chat" id="chatArea">
+          <!-- Messages injected by JS -->
+        </div>
+        <div class="phone__input">
+          <input class="phone__input-field" value="궁금한 점을 물어보세요" readonly>
+          <button class="phone__input-send">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO SLIDER -->
+<div class="logo-slider">
+  <div class="logo-slider__track">
+    <span class="logo-slider__item">숭실대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">경희대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">이화여자대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">성균관대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">연세대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">건국대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">한성대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">동덕여자대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">서울여자대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">광운대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">홍익대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">원광대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">인하대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">대진대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">숭실대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">경희대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">이화여자대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">성균관대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">연세대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">건국대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">한성대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">동덕여자대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">서울여자대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">광운대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">홍익대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">원광대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">인하대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">대진대학교</span><span class="logo-slider__item"><span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats" id="stats">
+  <div class="stats__inner">
+    <div class="stats__header reveal">
+      <div class="stats__label">Trust & Performance</div>
+      <h2 class="stats__title">신뢰와 실적이 증명합니다</h2>
+    </div>
+    <div class="stats__grid">
+      <div class="stat__item reveal" data-stat="partners">
+        <div class="stat__visual"><div class="stat__bars">
+          <div class="stat__bar" style="background:#d4d4d4;height:14px" data-animated="false"></div>
+          <div class="stat__bar" style="background:#a3a3a3;height:22px" data-animated="false"></div>
+          <div class="stat__bar" style="background:#737373;height:32px" data-animated="false"></div>
+          <div class="stat__bar" style="background:#404040;height:28px" data-animated="false"></div>
+          <div class="stat__bar" style="background:#111;height:44px" data-animated="false"></div>
+          <div class="stat__bar" style="background:#0055ff;height:48px" data-animated="false"></div>
+        </div></div>
+        <div class="stat__number"><span data-target="120" data-format="">0</span><span class="stat__suffix">+</span></div>
+        <div class="stat__name">Partner Institutions</div>
+      </div>
+      <div class="stat__item reveal" data-stat="suppliers">
+        <div class="stat__visual"><div class="stat__mini-dots" id="miniDots"></div></div>
+        <div class="stat__number"><span data-target="26000" data-format="comma">0</span><span class="stat__suffix">+</span></div>
+        <div class="stat__name">Supplier Network</div>
+      </div>
+      <div class="stat__item reveal" data-stat="years">
+        <div class="stat__visual"><div class="stat__progress"><div class="stat__progress-fill" data-width="88%"></div></div></div>
+        <div class="stat__number"><span data-target="15" data-format="">0</span><span class="stat__suffix"> Year+</span></div>
+        <div class="stat__name">Operation History</div>
+      </div>
+      <div class="stat__item reveal" data-stat="cost">
+        <div class="stat__visual"><div class="stat__curve-wrap"><canvas id="curveCanvas" style="width:100%;height:100%"></canvas></div></div>
+        <div class="stat__number"><span data-target="13" data-format="">0</span><span class="stat__suffix">%</span></div>
+        <div class="stat__name">Cost Reduction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__brand-logo"><span class="nav__logo-mark">IG</span> (주)이노가드</div>
+      <div class="footer__info">
+        대표이사 최용기 &nbsp;|&nbsp; 사업자번호 113-86-14764<br>
+        고객센터 02-869-2730 &nbsp;|&nbsp; 팩스 02-6499-2729<br>
+        (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호<br>
+        <span style="font-size:.7rem;color:var(--gray-400)">Room 209, 38-21, Digital-ro 31-gil, Guro-gu, Seoul, Korea</span>
+      </div>
+    </div>
+    <div class="footer__right">
+      <div class="footer__links">
+        <a href="#">개인정보처리방침</a><a href="#">이용약관</a><a href="#">시스템 문의</a>
+        <a href="https://www.inogard.co.kr/company5.html" target="_blank">오시는 길</a>
+      </div>
+      <div class="family-site" id="familySite">
+        <button class="family-site__btn" onclick="toggleFamily()">Family Site <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="family-site__list">
+          <a href="https://www.ebiz4u.co.kr" target="_blank">eBiz4U <span>구매조달시스템</span></a>
+          <a href="https://www.aptbid4u.co.kr" target="_blank">AptBid4U <span>공동주택 전자조달</span></a>
+          <a href="https://www.eepss.co.kr" target="_blank">EEPSS <span>전자조달시스템</span></a>
+          <a href="#" target="_blank">AptERP <span>아파트ERP</span></a>
+          <a href="#" target="_blank">TopERP <span>건설관리 ERP</span></a>
+          <a href="#" target="_blank">PerfectPay <span>근태확인시스템</span></a>
+          <a href="#" target="_blank">EbizInfo <span>입찰정보</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span class="footer__copy">Copyright &copy; <span id="footerYear"></span> inogard. All rights reserved.</span>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOut(event)">
+  <div class="modal">
+    <button class="modal__close" onclick="closeModal()">&times;</button>
+    <h3 class="modal__title">Contact us</h3>
+    <p class="modal__desc">궁금하신 사항을 남겨주시면 해당 부서에서 안내 드리겠습니다.</p>
+    <div class="form-group"><label>문의 분야</label><select><option>서비스 문의</option><option>기술 지원</option><option>제휴/파트너십</option><option>기타</option></select></div>
+    <div class="form-group"><label>회사/기관명</label><input type="text" placeholder="소속 기관명을 입력해주세요"></div>
+    <div class="form-group"><label>연락처</label><input type="tel" placeholder="010-0000-0000"></div>
+    <div class="form-group"><label>문의 내용</label><textarea placeholder="문의 내용을 입력해주세요"></textarea></div>
+    <button class="btn btn--dark" onclick="closeModal()">문의하기 →</button>
+  </div>
+</div>
+
+<script>
+document.getElementById('footerYear').textContent=new Date().getFullYear();
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+
+// ====== CHAT ANIMATION ======
+const chatData=[
+  {type:'user',text:'무엇을 하나요?',time:'오후 2:00'},
+  {type:'bot',text:'대학교, 기업의 구매의뢰, 입찰/견적, 업체선정, 계약체결, 입고/기성, 검수, 세금계산서 등 일련의 구매업무를 온라인으로 지원하는 최적의 전자조달 서비스입니다.',time:'오후 2:00'},
+  {type:'user',text:'무엇을 구매할 수 있나요?',time:'오후 2:01'},
+  {type:'bot',text:'집기/비품, 연구/실험 기자재, 공사/용역 및 다양한 소모품 구매가 가능합니다.',time:'오후 2:01'},
+  {type:'user',text:'신뢰할 수 있는 서비스인가요?',time:'오후 2:02'},
+  {type:'bot',text:'현재 약 120개의 대학교 및 대학교 부속기관이 이용하고 있습니다.',time:'오후 2:02'},
+  {type:'user',text:'비용은 얼마인가요?',time:'오후 2:03'},
+  {type:'bot',text:'일련의 구매 업무를 온라인으로 지원하는 모든 서비스를 무상으로 제공합니다.',time:'오후 2:03'},
+  {type:'user',text:'도입 효과는?',time:'오후 2:04'},
+  {type:'highlight',text:'📊 구매 원가 평균 13% 절감\n📋 전자계약 시 인지세 50% 절감',time:'오후 2:04'},
+];
+
+let chatIndex=0;
+let chatStarted=false;
+const chatArea=document.getElementById('chatArea');
+
+function addMessage(){
+  if(chatIndex>=chatData.length)return;
+  const msg=chatData[chatIndex];
+  const div=document.createElement('div');
+  div.className='chat-msg chat-msg--'+msg.type;
+  div.style.animationDelay=(chatIndex===0?'0s':'0s');
+  div.innerHTML=`<div class="chat-bubble">${msg.text.replace(/\n/g,'<br>')}</div><div class="chat-time">${msg.time}</div>`;
+  chatArea.appendChild(div);
+  chatArea.scrollTop=chatArea.scrollHeight;
+  chatIndex++;
+  if(chatIndex<chatData.length){
+    const delay=msg.type==='user'?600:1200;
+    setTimeout(addMessage,delay);
+  }
+}
+
+// Start chat when section is visible
+const chatObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting&&!chatStarted){
+      chatStarted=true;
+      setTimeout(addMessage,500);
+    }
+  });
+},{threshold:.3});
+chatObs.observe(document.getElementById('ebiz'));
+
+// ====== STATS ======
+(function(){const w=document.getElementById('miniDots');for(let i=0;i<35;i++){const d=document.createElement('div');d.className='stat__dot';d.dataset.animated='false';d.style.transitionDelay=(i*30)+'ms';w.appendChild(d)}})();
+
+const reveals=document.querySelectorAll('.reveal');
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('stat__item'))animateStat(e.target)}})},{threshold:.2});
+reveals.forEach(el=>obs.observe(el));
+
+function animateStat(el){
+  const span=el.querySelector('[data-target]');
+  if(span&&!span.dataset.done){
+    span.dataset.done='1';
+    const target=parseInt(span.dataset.target);const useComma=span.dataset.format==='comma';
+    const dur=2000;const start=performance.now();
+    (function tick(now){const p=Math.min((now-start)/dur,1);const eased=1-Math.pow(1-p,3);const cur=Math.round(target*eased);span.textContent=useComma?cur.toLocaleString():cur;if(p<1)requestAnimationFrame(tick)})(performance.now());
+  }
+  el.querySelectorAll('.stat__bar').forEach(b=>{b.dataset.animated='true'});
+  el.querySelectorAll('.stat__dot').forEach(d=>{d.dataset.animated='true'});
+  const fill=el.querySelector('.stat__progress-fill');if(fill)fill.style.width=fill.dataset.width;
+  if(el.dataset.stat==='cost')drawCurve();
+}
+
+function drawCurve(){
+  const canvas=document.getElementById('curveCanvas');if(!canvas||canvas.dataset.done)return;canvas.dataset.done='1';
+  const ctx=canvas.getContext('2d');const rect=canvas.parentElement.getBoundingClientRect();
+  canvas.width=rect.width*2;canvas.height=rect.height*2;canvas.style.width=rect.width+'px';canvas.style.height=rect.height+'px';
+  ctx.scale(2,2);const w=rect.width,h=rect.height,pad=4;let progress=0;
+  (function draw(){
+    progress=Math.min(progress+.025,1);ctx.clearRect(0,0,w,h);
+    const pts=[];for(let i=0;i<=30;i++){const t=i/30;pts.push({x:pad+t*(w-2*pad),y:pad+(1-(.88+.12*Math.cos(Math.PI*t)))*(h-2*pad)})}
+    const cnt=Math.floor(pts.length*progress);if(cnt<2){requestAnimationFrame(draw);return}
+    const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,'rgba(0,85,255,.08)');grad.addColorStop(1,'rgba(0,85,255,0)');
+    ctx.beginPath();ctx.moveTo(pts[0].x,h-pad);for(let i=0;i<cnt;i++)ctx.lineTo(pts[i].x,pts[i].y);ctx.lineTo(pts[cnt-1].x,h-pad);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+    ctx.beginPath();ctx.moveTo(pts[0].x,pts[0].y);for(let i=1;i<cnt;i++)ctx.lineTo(pts[i].x,pts[i].y);ctx.strokeStyle='#0055ff';ctx.lineWidth=1.8;ctx.lineCap='round';ctx.stroke();
+    const last=pts[cnt-1];ctx.beginPath();ctx.arc(last.x,last.y,2.5,0,Math.PI*2);ctx.fillStyle='#0055ff';ctx.fill();
+    ctx.beginPath();ctx.arc(last.x,last.y,5,0,Math.PI*2);ctx.fillStyle='rgba(0,85,255,.15)';ctx.fill();
+    if(progress<1)requestAnimationFrame(draw);
+  })();
+}
+
+function openModal(e){e.preventDefault();document.getElementById('modalOverlay').classList.add('active');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('active');document.body.style.overflow=''}
+function closeModalOut(e){if(e.target===e.currentTarget)closeModal()}
+function toggleFamily(){document.getElementById('familySite').classList.toggle('open')}
+document.addEventListener('click',e=>{if(!e.target.closest('.family-site'))document.getElementById('familySite').classList.remove('open')});
+</script>
+</body>
+</html>
