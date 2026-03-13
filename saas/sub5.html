@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>엡스 (eepss) | 이노가드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --primary: #1a56db;
+    --primary-dark: #0f3a8e;
+    --primary-light: #e8f0fe;
+    --primary-50: #f0f5ff;
+    --accent: #00c9a7;
+    --accent-light: #e6faf5;
+    --accent-dark: #00a88a;
+    --dark: #191f28;
+    --gray-900: #333d4b;
+    --gray-700: #4e5968;
+    --gray-600: #6b7684;
+    --gray-500: #8b95a1;
+    --gray-400: #b0b8c1;
+    --gray-200: #e5e8eb;
+    --gray-100: #f2f4f6;
+    --gray-50: #f9fafb;
+    --white: #ffffff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: var(--white); color: var(--gray-900); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* ── HEADER ── */
+  .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; background: rgba(255,255,255,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(0,0,0,0.05); transition: box-shadow 0.3s ease; }
+  .header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .header-inner { max-width: 1140px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .header-logo { height: 28px; display: flex; align-items: center; cursor: pointer; }
+  .header-logo a { height: 100%; }
+  .header-logo img { height: 100%; object-fit: contain; }
+  .header-nav { display: flex; align-items: center; height: 100%; }
+  .nav-item { position: relative; height: 100%; display: flex; align-items: center; padding: 0 20px; font-size: 15px; font-weight: 500; color: var(--gray-700); cursor: pointer; transition: color 0.2s; }
+  .nav-item:hover { color: var(--dark); }
+  .mega-menu { position: absolute; top: 64px; background: var(--white); border: 1px solid var(--gray-200); border-top: none; border-radius: 0 0 14px 14px; padding: 0 24px; min-width: 200px; box-shadow: var(--shadow-lg); overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, padding 0.35s ease; }
+  .nav-item:hover .mega-menu { max-height: 400px; opacity: 1; padding-top: 16px; padding-bottom: 16px; }
+  .mega-menu-wide { min-width: 420px; display: grid; grid-template-columns: 1fr 1fr; }
+  .mega-link { display: block; padding: 8px 10px; margin: 2px -10px; font-size: 14px; color: var(--gray-700); text-decoration: none; border-radius: 8px; transition: var(--transition); }
+  .mega-link:hover { background: var(--gray-50); color: var(--dark); }
+  .mega-link.active { color: var(--primary); font-weight: 600; }
+  .nav-contact { margin-left: 16px; padding: 8px 20px; background: var(--primary); color: var(--white); font-size: 14px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: var(--transition); }
+  .nav-contact:hover { background: var(--primary-dark); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { margin-top: 64px; padding: 80px 0 60px; background: linear-gradient(135deg, #0a1628 0%, #0f2647 50%, #132f5a 100%); position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 64px 64px; }
+  .page-hero-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 0 40px; }
+  .page-breadcrumb { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+  .page-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .page-breadcrumb span { color: rgba(255,255,255,0.25); margin: 0 8px; }
+  .page-title { display: flex; align-items: center; gap: 16px; }
+  .page-title-logo { height: 40px; display: flex; align-items: center; }
+  .page-title-logo img { height: 100%; object-fit: contain; }
+  .page-title-logo .ph { font-size: 13px; color: rgba(255,255,255,0.35); padding: 8px 16px; border: 1px dashed rgba(255,255,255,0.2); border-radius: 8px; white-space: nowrap; }
+  .page-title h1 { font-size: 36px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; }
+  .page-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 10px; font-weight: 300; }
+
+  /* ── SUB NAV ── */
+  .sub-nav { background: var(--white); border-bottom: 1px solid var(--gray-200); position: sticky; top: 64px; z-index: 50; }
+  .sub-nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 40px; display: flex; }
+  .sub-nav-link { padding: 16px 24px; font-size: 14px; font-weight: 500; color: var(--gray-500); text-decoration: none; border-bottom: 2px solid transparent; transition: var(--transition); }
+  .sub-nav-link:hover { color: var(--gray-700); }
+  .sub-nav-link.active { color: var(--primary); font-weight: 600; border-bottom-color: var(--primary); }
+
+  /* ── CONTENT ── */
+  .content { max-width: 1140px; margin: 0 auto; padding: 80px 40px 120px; }
+
+  /* ── INTRO ── */
+  .intro { display: flex; gap: 64px; align-items: flex-start; margin-bottom: 80px; }
+  .intro-text { flex: 1; min-width: 0; }
+  .intro-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .intro-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; line-height: 1.35; margin-bottom: 24px; }
+  .intro-desc { font-size: 16px; color: var(--gray-600); line-height: 1.9; word-break: keep-all; }
+  .intro-desc p { margin-bottom: 16px; }
+  .intro-desc p:last-child { margin-bottom: 0; }
+  .intro-image { flex-shrink: 0; width: 440px; height: 320px; border-radius: var(--radius); background: var(--gray-100); box-shadow: var(--shadow-card); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .intro-image img { width: 100%; height: 100%; }
+  .intro-image .ph { font-size: 14px; color: var(--gray-400); text-align: center; }
+
+  /* ── WHY ── */
+  .why-section { margin-bottom: 80px; }
+  .why-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent-dark); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .why-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+  .why-card { background: var(--accent-light); border-radius: var(--radius-sm); padding: 36px 32px; }
+  .why-card p { font-size: 16px; color: var(--gray-700); line-height: 1.85; word-break: keep-all; }
+
+  /* ── FEATURES ── */
+  .feature-section { margin-bottom: 80px; }
+  .feature-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .feature-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .feature-card { background: var(--white); border-radius: var(--radius-sm); box-shadow: var(--shadow-card); padding: 32px 24px; text-align: center; transition: var(--transition); }
+  .feature-card:hover { box-shadow: var(--shadow-lg); }
+  .feature-card-icon { width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 14px; background: var(--primary-light); display: flex; align-items: center; justify-content: center; }
+  .feature-card-icon svg { width: 24px; height: 24px; stroke: var(--primary); stroke-width: 2; fill: none; }
+  .feature-card h4 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .feature-card p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+
+  /* ── EFFECT ── */
+  .effect-section {}
+  .effect-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent-dark); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .effect-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+  .effect-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .effect-card { background: var(--primary-50); border-radius: var(--radius-sm); padding: 32px 24px; text-align: center; }
+  .effect-num { font-family: 'Inter', sans-serif; font-size: 36px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+  .effect-desc { font-size: 15px; color: var(--gray-700); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--dark); padding: 52px 40px 32px; }
+  .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px; gap: 60px; }
+  .footer-brand { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 14px; }
+  .footer-brand img { height: 28px; }
+  .footer-info p { font-size: 13px; line-height: 2; color: rgba(255,255,255,0.35); }
+  .footer-info strong { color: rgba(255,255,255,0.55); }
+  .footer-right { text-align: right; }
+  .footer-family-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .footer-links { display: flex; gap: 18px; }
+  .footer-links a { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4); text-decoration: none; transition: var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copyright { text-align: center; font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  /* ── ANIMATION ── */
+  .fade-up { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="../index.html"><img src="../image/이노가드-로고.png" alt="이노가드 로고"></a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link" href="../introduce/sub1.html">인사말 / 비전</a>
+          <a class="mega-link" href="../introduce/sub2.html">연혁</a>
+          <a class="mega-link" href="../introduce/sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="sub2.html">홈 IoT</a>
+            <a class="mega-link" href="sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link" href="sub4.html">아파트ERP</a>
+            <a class="mega-link active" href="sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="../solution/sub1.html">전자입찰</a>
+          <a class="mega-link" href="../solution/sub2.html">전자계약</a>
+          <a class="mega-link" href="../solution/sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      <button class="nav-contact">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ PAGE HERO ══════ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../index.html">홈</a>
+      <span>›</span>
+      사업부문
+      <span>›</span>
+      엡스
+    </div>
+    <div class="page-title">
+      <div class="page-title-logo">
+        <img src="../image/엡스-로고.gif" alt="엡스 로고">
+        <span class="ph" style="display:none;">엡스 로고</span>
+      </div>
+      <h1>엡스 (eepss)</h1>
+    </div>
+    <p class="page-subtitle">초기 비용 없이 월정액으로 이용하는 전자조달 시스템</p>
+  </div>
+</section>
+
+<!-- ══════ SUB NAV ══════ -->
+<nav class="sub-nav">
+  <div class="sub-nav-inner">
+    <a class="sub-nav-link" href="sub1.html">eBiz4U</a>
+    <a class="sub-nav-link" href="sub2.html">홈 IoT</a>
+    <a class="sub-nav-link" href="sub3.html">아파트비드포유</a>
+    <a class="sub-nav-link" href="sub4.html">아파트ERP</a>
+    <a class="sub-nav-link active" href="sub5.html">엡스 (eepss)</a>
+  </div>
+</nav>
+
+<!-- ══════ CONTENT ══════ -->
+<main class="content">
+
+  <!-- 소개 -->
+  <section class="intro fade-up">
+    <div class="intro-text">
+      <p class="intro-label">About EEPSS</p>
+      <h2 class="intro-title">월정액 전자조달 서비스</h2>
+      <div class="intro-desc">
+        <p>엡스는 전자조달시스템 구축 시 필요한 비용 문제로 도입이 어려웠던 전자조달시스템을, 초기 구축 비용 없이 월정액 사용료만 내고 이용할 수 있는 서비스입니다.</p>
+        <p>초기 투자비, 개발 인력, 전산 환경, 데이터 연결 등의 고민 없이 바로 전자조달 환경을 구축할 수 있어, 중소기업에 최적화된 전자조달 솔루션입니다.</p>
+      </div>
+    </div>
+    <div class="intro-image">
+      <img src="" alt="엡스 서비스 이미지" style="display:none;">
+      <span class="ph">엡스 서비스 이미지경로</span>
+    </div>
+  </section>
+
+  <!-- 왜 엡스인가 -->
+  <section class="why-section fade-up delay-1">
+    <p class="why-label">Why EEPSS</p>
+    <h2 class="why-title">엡스를 쓰는 이유</h2>
+    <div class="why-card">
+      <p>초기 투자비, 개발 인력, 전산 환경, 데이터 연결 고민이 필요 없습니다. 월정액만 내면 전자입찰, 전자계약, 전자세금계산서, 협력사 관리까지 전자조달에 필요한 모든 기능을 바로 이용할 수 있습니다. 시스템 구축에 드는 시간과 비용을 절감하고, 본업에 집중할 수 있는 환경을 만들어 드립니다.</p>
+    </div>
+  </section>
+
+  <!-- 주요 기능 -->
+  <section class="feature-section fade-up delay-1">
+    <p class="feature-label">Key Features</p>
+    <h2 class="feature-title">주요 기능</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </div>
+        <h4>전자입찰</h4>
+        <p>공고부터 입찰까지 온라인으로 처리</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>전자계약</h4>
+        <p>인증서 기반 안전한 온라인 계약 체결</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        </div>
+        <h4>전자세금계산서</h4>
+        <p>국세청 표준 준수 자동 발행·전송</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h4>협력사 관리</h4>
+        <p>공급사 등록·평가·이력 통합 관리</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 기대 효과 -->
+  <section class="effect-section fade-up delay-2">
+    <p class="effect-label">Expected Benefits</p>
+    <h2 class="effect-title">기대 효과</h2>
+    <div class="effect-cards">
+      <div class="effect-card">
+        <div class="effect-num">원가 ↓</div>
+        <p class="effect-desc">구매 원가 절감을 통한 경영 효율화</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-num">비용 ↓</div>
+        <p class="effect-desc">초기 구축 비용 제로, 월정액 운영</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-num">시간 ↓</div>
+        <p class="effect-desc">구매 업무 자동화로 처리 시간 단축</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../image/이노가드-로고.png" alt="이노가드 로고">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
