@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아파트ERP | 이노가드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --primary: #1a56db;
+    --primary-dark: #0f3a8e;
+    --primary-light: #e8f0fe;
+    --primary-50: #f0f5ff;
+    --accent: #00c9a7;
+    --accent-light: #e6faf5;
+    --accent-dark: #00a88a;
+    --dark: #191f28;
+    --gray-900: #333d4b;
+    --gray-700: #4e5968;
+    --gray-600: #6b7684;
+    --gray-500: #8b95a1;
+    --gray-400: #b0b8c1;
+    --gray-200: #e5e8eb;
+    --gray-100: #f2f4f6;
+    --gray-50: #f9fafb;
+    --white: #ffffff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--white); color: var(--gray-900);
+    -webkit-font-smoothing: antialiased; overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; background: rgba(255,255,255,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(0,0,0,0.05); transition: box-shadow 0.3s ease; }
+  .header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .header-inner { max-width: 1140px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .header-logo { height: 28px; display: flex; align-items: center; cursor: pointer; }
+  .header-logo a { height: 100%; }
+  .header-logo img { height: 100%; object-fit: contain; }
+  .header-nav { display: flex; align-items: center; height: 100%; }
+  .nav-item { position: relative; height: 100%; display: flex; align-items: center; padding: 0 20px; font-size: 15px; font-weight: 500; color: var(--gray-700); cursor: pointer; transition: color 0.2s; }
+  .nav-item:hover { color: var(--dark); }
+  .mega-menu { position: absolute; top: 64px; background: var(--white); border: 1px solid var(--gray-200); border-top: none; border-radius: 0 0 14px 14px; padding: 0 24px; min-width: 200px; box-shadow: var(--shadow-lg); overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, padding 0.35s ease; }
+  .nav-item:hover .mega-menu { max-height: 400px; opacity: 1; padding-top: 16px; padding-bottom: 16px; }
+  .mega-menu-wide { min-width: 420px; display: grid; grid-template-columns: 1fr 1fr; }
+  .mega-link { display: block; padding: 8px 10px; margin: 2px -10px; font-size: 14px; color: var(--gray-700); text-decoration: none; border-radius: 8px; transition: var(--transition); }
+  .mega-link:hover { background: var(--gray-50); color: var(--dark); }
+  .mega-link.active { color: var(--primary); font-weight: 600; }
+  .nav-contact { margin-left: 16px; padding: 8px 20px; background: var(--primary); color: var(--white); font-size: 14px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: var(--transition); }
+  .nav-contact:hover { background: var(--primary-dark); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { margin-top: 64px; padding: 80px 0 60px; background: linear-gradient(135deg, #0a1628 0%, #0f2647 50%, #132f5a 100%); position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 64px 64px; }
+  .page-hero-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 0 40px; }
+  .page-breadcrumb { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+  .page-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .page-breadcrumb span { color: rgba(255,255,255,0.25); margin: 0 8px; }
+  .page-title { display: flex; align-items: center; gap: 16px; }
+  .page-title-logo { height: 40px; display: flex; align-items: center; }
+  .page-title-logo img { height: 100%; object-fit: contain; }
+  .page-title-logo .ph { font-size: 13px; color: rgba(255,255,255,0.35); padding: 8px 16px; border: 1px dashed rgba(255,255,255,0.2); border-radius: 8px; white-space: nowrap; }
+  .page-title h1 { font-size: 36px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; }
+  .page-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 10px; font-weight: 300; }
+
+  /* ── SUB NAV ── */
+  .sub-nav { background: var(--white); border-bottom: 1px solid var(--gray-200); position: sticky; top: 64px; z-index: 50; }
+  .sub-nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 40px; display: flex; }
+  .sub-nav-link { padding: 16px 24px; font-size: 14px; font-weight: 500; color: var(--gray-500); text-decoration: none; border-bottom: 2px solid transparent; transition: var(--transition); }
+  .sub-nav-link:hover { color: var(--gray-700); }
+  .sub-nav-link.active { color: var(--primary); font-weight: 600; border-bottom-color: var(--primary); }
+
+  /* ── CONTENT ── */
+  .content { max-width: 1140px; margin: 0 auto; padding: 80px 40px 120px; }
+
+  /* ── INTRO ── */
+  .intro { display: flex; gap: 64px; align-items: flex-start; margin-bottom: 80px; }
+  .intro-text { flex: 1; min-width: 0; }
+  .intro-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .intro-title { font-size: 32px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; line-height: 1.35; margin-bottom: 24px; }
+  .intro-desc { font-size: 16px; color: var(--gray-600); line-height: 1.9; word-break: keep-all; }
+  .intro-desc p { margin-bottom: 16px; }
+  .intro-desc p:last-child { margin-bottom: 0; }
+  .intro-image { flex-shrink: 0; width: 440px; height: 320px; border-radius: var(--radius); background: var(--gray-100); box-shadow: var(--shadow-card); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .intro-image img { width: 100%; height: 100%; }
+  .intro-image .ph { font-size: 14px; color: var(--gray-400); text-align: center; }
+
+  /* ── FEATURE CARDS ── */
+  .feature-section { margin-bottom: 80px; }
+  .feature-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent-dark); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .feature-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+  .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .feature-card { background: var(--white); border-radius: var(--radius-sm); box-shadow: var(--shadow-card); padding: 32px 28px; transition: var(--transition); }
+  .feature-card:hover { box-shadow: var(--shadow-lg); }
+  .feature-card-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .feature-card-icon svg { width: 22px; height: 22px; stroke: var(--accent-dark); stroke-width: 2; fill: none; }
+  .feature-card h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .feature-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; word-break: keep-all; }
+
+  /* ── DIFF ── */
+  .diff-section { margin-bottom: 80px; }
+  .diff-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--primary); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .diff-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+  .diff-card { background: var(--primary-50); border-radius: var(--radius-sm); padding: 36px 32px; }
+  .diff-card p { font-size: 16px; color: var(--gray-700); line-height: 1.85; word-break: keep-all; }
+
+  /* ── EFFECT ── */
+  .effect-section {}
+  .effect-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; color: var(--accent-dark); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .effect-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+  .effect-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .effect-card { background: var(--accent-light); border-radius: var(--radius-sm); padding: 32px 24px; text-align: center; }
+  .effect-card-icon { width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 14px; background: var(--white); display: flex; align-items: center; justify-content: center; }
+  .effect-card-icon svg { width: 24px; height: 24px; stroke: var(--accent-dark); stroke-width: 2; fill: none; }
+  .effect-card h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .effect-card p { font-size: 14px; color: var(--gray-600); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--dark); padding: 52px 40px 32px; }
+  .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px; gap: 60px; }
+  .footer-brand { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 14px; }
+  .footer-brand img { height: 28px; }
+  .footer-info p { font-size: 13px; line-height: 2; color: rgba(255,255,255,0.35); }
+  .footer-info strong { color: rgba(255,255,255,0.55); }
+  .footer-right { text-align: right; }
+  .footer-family-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .footer-links { display: flex; gap: 18px; }
+  .footer-links a { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4); text-decoration: none; transition: var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copyright { text-align: center; font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  /* ── ANIMATION ── */
+  .fade-up { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="../index.html"><img src="../../image/이노가드-로고.png" alt="이노가드 로고"></a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link" href="../introduce/sub1.html">인사말 / 비전</a>
+          <a class="mega-link" href="../introduce/sub2.html">연혁</a>
+          <a class="mega-link" href="../introduce/sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="sub2.html">홈 IoT</a>
+            <a class="mega-link" href="sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link active" href="sub4.html">아파트ERP</a>
+            <a class="mega-link" href="sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="../solution/sub1.html">전자입찰</a>
+          <a class="mega-link" href="../solution/sub2.html">전자계약</a>
+          <a class="mega-link" href="../solution/sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      <button class="nav-contact">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ PAGE HERO ══════ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../index.html">홈</a>
+      <span>›</span>
+      사업부문
+      <span>›</span>
+      아파트ERP
+    </div>
+    <div class="page-title">
+      <div class="page-title-logo">
+        <img src="../../image/아파트이알피-로고.png" alt="아파트ERP 로고" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      </div>
+    </div>
+    <p class="page-subtitle">입주민부터 국가기관까지 연결하는 아파트 통합 포털 시스템</p>
+  </div>
+</section>
+
+<!-- ══════ SUB NAV ══════ -->
+<nav class="sub-nav">
+  <div class="sub-nav-inner">
+    <a class="sub-nav-link" href="sub1.html">eBiz4U</a>
+    <a class="sub-nav-link" href="sub2.html">홈 IoT</a>
+    <a class="sub-nav-link" href="sub3.html">아파트비드포유</a>
+    <a class="sub-nav-link active" href="sub4.html">아파트ERP</a>
+    <a class="sub-nav-link" href="sub5.html">엡스 (eepss)</a>
+  </div>
+</nav>
+
+<!-- ══════ CONTENT ══════ -->
+<main class="content">
+
+  <!-- 소개 -->
+  <section class="intro fade-up">
+    <div class="intro-text">
+      <p class="intro-label">About AptERP</p>
+      <h2 class="intro-title">아파트 통합 포털 시스템</h2>
+      <div class="intro-desc">
+        <p>AptERP는 입주민, 대표회의, 관리업체, 국가기관까지 모두 연결해서 사용하는 아파트 통합 포털 시스템입니다. 재무 관리, 에너지 관리, 민원 관리, 전자입찰 연동 등 아파트 운영에 필요한 핵심 기능을 하나의 플랫폼에서 제공합니다.</p>
+        <p>기존 프로그램들이 단순 전산처리 용도에 그쳤다면, AptERP는 자산관리, 전자결재, 전자투표, 장기수선계획, 음성방송 등 한 차원 높은 기능을 갖추고 있습니다.</p>
+      </div>
+    </div>
+    <div class="intro-image">
+      <img src="" alt="아파트ERP 서비스 이미지" style="display:none;">
+      <span class="ph">아파트ERP 서비스 이미지경로</span>
+    </div>
+  </section>
+
+  <!-- 주요 기능 -->
+  <section class="feature-section fade-up delay-1">
+    <p class="feature-label">Key Features</p>
+    <h2 class="feature-title">주요 기능</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h4>재무 관리</h4>
+        <p>관리비 계산(부과세), 자동이체 처리, 직원 월급 계산 등 아파트 재무 업무를 체계적으로 관리합니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <h4>에너지 관리</h4>
+        <p>전기, 수도, 가스 검침 데이터를 한전이나 가스공사에 바로 전송하여 에너지 관리를 자동화합니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h4>민원 관리</h4>
+        <p>입주민 민원을 접수하고 처리 현황을 실시간으로 추적하여 신속한 대응이 가능합니다.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h4>전자입찰 연동</h4>
+        <p>아파트비드포유와 연동하여 전자입찰 업무를 ERP 내에서 통합 관리할 수 있습니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 차별점 -->
+  <section class="diff-section fade-up delay-1">
+    <p class="diff-label">Differentiation</p>
+    <h2 class="diff-title">기존 프로그램과의 차별점</h2>
+    <div class="diff-card">
+      <p>기존 아파트 관리 프로그램들이 단순 전산처리 용도에 그쳤다면, AptERP는 자산관리, 전자결재, 전자투표, 장기수선계획, 음성방송 등 아파트 운영 전반을 아우르는 기능을 제공합니다. 입주민, 대표회의, 관리업체, 국가기관까지 모든 이해관계자를 하나의 플랫폼으로 연결하여, 아파트 관리의 새로운 기준을 제시합니다.</p>
+    </div>
+  </section>
+
+  <!-- 기대 효과 -->
+  <section class="effect-section fade-up delay-2">
+    <p class="effect-label">Expected Benefits</p>
+    <h2 class="effect-title">기대 효과</h2>
+    <div class="effect-cards">
+      <div class="effect-card">
+        <div class="effect-card-icon">
+          <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h4>편리함</h4>
+        <p>인터넷과 스마트폰만 있으면 언제 어디서나 이용 가능합니다.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>안전함</h4>
+        <p>365일 24시간 운영과 철저한 보안으로 안전하게 관리됩니다.</p>
+      </div>
+      <div class="effect-card">
+        <div class="effect-card-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h4>비용 절약</h4>
+        <p>SaaS 방식으로 초기 구축 비용 없이 합리적으로 이용합니다.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../../image/이노가드-로고.png" alt="이노가드 로고">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

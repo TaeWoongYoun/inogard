@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>연혁 | 이노가드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --primary: #1a56db;
+    --primary-dark: #0f3a8e;
+    --primary-light: #e8f0fe;
+    --primary-50: #f0f5ff;
+    --accent: #00c9a7;
+    --accent-light: #e6faf5;
+    --accent-dark: #00a88a;
+    --dark: #191f28;
+    --gray-900: #333d4b;
+    --gray-700: #4e5968;
+    --gray-600: #6b7684;
+    --gray-500: #8b95a1;
+    --gray-400: #b0b8c1;
+    --gray-200: #e5e8eb;
+    --gray-100: #f2f4f6;
+    --gray-50: #f9fafb;
+    --white: #ffffff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--gray-900);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 64px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  .header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-logo { height: 28px; display: flex; align-items: center; cursor: pointer; }
+  .header-logo a { height: 100%; }
+  .header-logo img { height: 100%; object-fit: contain; }
+  .header-nav { display: flex; align-items: center; height: 100%; }
+  .nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .nav-item:hover { color: var(--dark); }
+  .mega-menu {
+    position: absolute;
+    top: 64px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 0 24px;
+    min-width: 200px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
+  }
+  .nav-item:hover .mega-menu {
+    max-height: 400px;
+    opacity: 1;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .mega-menu-wide { min-width: 420px; display: grid; grid-template-columns: 1fr 1fr; }
+  .mega-link {
+    display: block;
+    padding: 8px 10px;
+    margin: 2px -10px;
+    font-size: 14px;
+    color: var(--gray-700);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: var(--transition);
+  }
+  .mega-link:hover { background: var(--gray-50); color: var(--dark); }
+  .mega-link.active { color: var(--primary); font-weight: 600; }
+  .nav-contact {
+    margin-left: 16px;
+    padding: 8px 20px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .nav-contact:hover { background: var(--primary-dark); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    margin-top: 64px;
+    padding: 80px 0 60px;
+    background: linear-gradient(135deg, #0a1628 0%, #0f2647 50%, #132f5a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .page-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .page-breadcrumb {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+  .page-breadcrumb a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .page-breadcrumb span { color: rgba(255,255,255,0.25); margin: 0 8px; }
+  .page-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .page-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+    font-weight: 300;
+  }
+
+  /* ── SUB NAV ── */
+  .sub-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+  }
+  .sub-nav-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+  }
+  .sub-nav-link {
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-500);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+  }
+  .sub-nav-link:hover { color: var(--gray-700); }
+  .sub-nav-link.active {
+    color: var(--primary);
+    font-weight: 600;
+    border-bottom-color: var(--primary);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 200px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 180px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gray-200);
+  }
+
+  .timeline-year {
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .timeline-year-label {
+    position: absolute;
+    left: -200px;
+    width: 160px;
+    text-align: right;
+    padding-right: 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+    top: 0;
+  }
+
+  .timeline-year-dot {
+    position: absolute;
+    left: -26px;
+    top: 8px;
+    width: 12px;
+    height: 12px;
+    background: var(--primary);
+    border-radius: 50%;
+    border: 3px solid var(--white);
+    box-shadow: 0 0 0 2px var(--primary);
+    z-index: 1;
+  }
+
+  .timeline-events {
+    padding-bottom: 48px;
+    padding-left: 24px;
+  }
+
+  .timeline-event {
+    margin-bottom: 24px;
+    padding: 20px 24px;
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    position: relative;
+  }
+  .timeline-event:last-child { margin-bottom: 0; }
+  .timeline-event:hover { box-shadow: var(--shadow-lg); }
+
+  .timeline-month {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+
+  .timeline-desc p { margin-bottom: 4px; }
+  .timeline-desc p:last-child { margin-bottom: 0; }
+
+  /* highlight events */
+  .timeline-event.highlight {
+    border-left: 3px solid var(--primary);
+  }
+  .timeline-event.highlight-accent {
+    border-left: 3px solid var(--accent);
+  }
+  .timeline-event.highlight-accent .timeline-month {
+    color: var(--accent-dark);
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark);
+    padding: 52px 40px 32px;
+  }
+  .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 24px;
+    gap: 60px;
+  }
+  .footer-brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .footer-brand img { height: 28px; }
+  .footer-info p { font-size: 13px; line-height: 2; color: rgba(255,255,255,0.35); }
+  .footer-info strong { color: rgba(255,255,255,0.55); }
+  .footer-right { text-align: right; }
+  .footer-family-title {
+    font-size: 11px; font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .footer-links { display: flex; gap: 18px; }
+  .footer-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copyright { text-align: center; font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  /* ── ANIMATION ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="../index.html"><img src="../../image/이노가드-로고.png" alt="이노가드 로고"></a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link" href="sub1.html">인사말 / 비전</a>
+          <a class="mega-link active" href="sub2.html">연혁</a>
+          <a class="mega-link" href="sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="../saas/sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="../saas/sub2.html">홈 IoT</a>
+            <a class="mega-link" href="../saas/sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link" href="../saas/sub4.html">아파트ERP</a>
+            <a class="mega-link" href="../saas/sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="../solution/sub1.html">전자입찰</a>
+          <a class="mega-link" href="../solution/sub2.html">전자계약</a>
+          <a class="mega-link" href="../solution/sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      <button class="nav-contact">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ PAGE HERO ══════ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../index.html">홈</a>
+      <span>›</span>
+      <a href="sub1.html">회사소개</a>
+      <span>›</span>
+      연혁
+    </div>
+    <h1 class="page-title">연혁</h1>
+    <p class="page-subtitle">2001년부터 이어온 이노가드의 발자취</p>
+  </div>
+</section>
+
+<!-- ══════ SUB NAV ══════ -->
+<nav class="sub-nav">
+  <div class="sub-nav-inner">
+    <a class="sub-nav-link" href="sub1.html">인사말 / 비전</a>
+    <a class="sub-nav-link active" href="sub2.html">연혁</a>
+    <a class="sub-nav-link" href="sub3.html">인증 & 특허</a>
+  </div>
+</nav>
+
+<!-- ══════ CONTENT ══════ -->
+<main class="content">
+  <div class="timeline">
+
+    <!-- 2020 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2020</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event highlight-accent">
+          <div class="timeline-month">08월</div>
+          <div class="timeline-desc">
+            <p>구매대리 시스템 및 방법 특허 등록</p>
+            <p>이동통신단말 기반 전문건설업체에서의 현장정보 관리 시스템 특허 등록</p>
+          </div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>구매대리 서비스 오픈</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2019 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2019</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event highlight-accent">
+          <div class="timeline-month">11월</div>
+          <div class="timeline-desc"><p>TaaS 기반의 자산조달관리 장치 특허 등록</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2018 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2018</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc"><p>대성물류건설(대성산업그룹) ebiz4u 입찰 대행 체결</p></div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">06월</div>
+          <div class="timeline-desc"><p>Hi Seoul Brand(하이서울브랜드) 기업선정</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2017 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2017</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">12월</div>
+          <div class="timeline-desc"><p>전자수입인지 연동 (KTNET)</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc"><p>공동주택/집합건물 ERP 서비스 오픈</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2016 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2016</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event highlight">
+          <div class="timeline-month">12월</div>
+          <div class="timeline-desc"><p>건설협력증진대상 국토부장관 표창</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2015 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2015</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc"><p>대금지급 서비스 퍼펙트 페이 서비스 오픈</p></div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">07월</div>
+          <div class="timeline-desc"><p>민간 전자입찰시스템 사업자 지정 승인 (국토교통부)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2014 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2014</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">05월</div>
+          <div class="timeline-desc"><p>공동주택 전용 전자입찰/계약 서비스 오픈 (아파트비드포유)</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">04월</div>
+          <div class="timeline-desc"><p>대학교 동문 전자구매 서비스 오픈 (숭실대학교와 협약)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2013 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2013</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>의료기관 전용 전자구매 서비스 오픈</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2012 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2012</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>연세대학교 산학협력단 구매대행 계약 체결</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2011 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2011</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>세금계산서 3.0 표준 이비즈포유 적용 (국세청 연계)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2010 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2010</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">08월</div>
+          <div class="timeline-desc"><p>전자세금계산서 국세청 3.0 표준 인증 획득</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>전자조달솔루션 공동사업 협약 체결 (이크레더블)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2009 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2009</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">12월</div>
+          <div class="timeline-desc"><p>전자세금계산서 대용량 사업자 등록</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">11월</div>
+          <div class="timeline-desc"><p>전자세금계산서 서비스 오픈</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc"><p>본점 이전</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">09월</div>
+          <div class="timeline-desc"><p>표준전자세금계산서 국세청 전송 Agent MOU 체결 (한국정보인증)</p></div>
+        </div>
+        <div class="timeline-event highlight-accent">
+          <div class="timeline-month">04월</div>
+          <div class="timeline-desc">
+            <p>경영혁신형 중소기업 확인 (신용보증기금)</p>
+            <p>혁신형 중소기업인증 (기술보증기금)</p>
+          </div>
+        </div>
+        <div class="timeline-event highlight-accent">
+          <div class="timeline-month">02월</div>
+          <div class="timeline-desc">
+            <p>전자입찰방법 및 시스템 특허 등록</p>
+            <p>전자계약관리방법 및 시스템 특허 등록</p>
+          </div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>국내 최초 건설사 전용 전자입찰/계약 서비스 오픈 (엡스)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2008 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2008</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">11월</div>
+          <div class="timeline-desc"><p>표준전자세금계산서 3.0 표준화그룹 위원사 선정</p></div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc"><p>공로패 수상 (숭실대학교)</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">05월</div>
+          <div class="timeline-desc"><p>소프트웨어 사업자 신고</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">04월</div>
+          <div class="timeline-desc"><p>기업부설연구소 설립</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2007 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2007</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc">
+            <p>대아그룹 계열 제외</p>
+            <p>이비즈소프트 인수 (발행주식 100%)</p>
+          </div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">09월</div>
+          <div class="timeline-desc"><p>벤처기업 (기술평가보증기업) 확인</p></div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">06월</div>
+          <div class="timeline-desc">
+            <p>최용기 대표이사 취임 (현)</p>
+            <p>주식회사 이노가드 설립</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2006 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2006</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">12월</div>
+          <div class="timeline-desc"><p>이비즈포유 V2.0 오픈</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">05월</div>
+          <div class="timeline-desc"><p>대아그룹 계열 편입</p></div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">03월</div>
+          <div class="timeline-desc"><p>감사패 수상 (롯데건설)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2005 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2005</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">07월</div>
+          <div class="timeline-desc"><p>표준전자세금계산서 2.0 인증</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">04월</div>
+          <div class="timeline-desc"><p>소프트웨어 공학연구소 설립</p></div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>전자구매 시스템(SaaS) 개발완료 (ebiz4U)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2002 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2002</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">03월</div>
+          <div class="timeline-desc"><p>숭실대학교 산학연 업체선정 (무선인터넷을 이용한 영상전송시스템)</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">01월</div>
+          <div class="timeline-desc"><p>엘지텔레콤 XML을 이용한 Knowledge Database 컨설팅 (UML기법)</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2001 -->
+    <div class="timeline-year fade-up">
+      <div class="timeline-year-label">2001</div>
+      <div class="timeline-year-dot"></div>
+      <div class="timeline-events">
+        <div class="timeline-event">
+          <div class="timeline-month">10월</div>
+          <div class="timeline-desc"><p>기술신용보증기금 기술형 창업보증 지원 (객체지향개발방법)</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">05월</div>
+          <div class="timeline-desc"><p>한국 BEA, BPM(Business Process Management) 부문 기술협력체결</p></div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">04월</div>
+          <div class="timeline-desc">
+            <p>한국오라클 OIVC(ORACLE Internet Venture Community) 가입</p>
+            <p>엘지전자기술연구원 소프트웨어 개발부문 협력업체 등록</p>
+            <p>숭실대학교 정보과학대학원 소프트웨어공학연구소 기술협력체결</p>
+          </div>
+        </div>
+        <div class="timeline-event">
+          <div class="timeline-month">03월</div>
+          <div class="timeline-desc">
+            <p>숭실대학교 벤처중소기업센터 23호 입주</p>
+            <p>소프트뱅크 코리아 Software 및 킹스톤 메모리 분야 협력체결</p>
+            <p>전자상거래 표준화 협회 가입</p>
+          </div>
+        </div>
+        <div class="timeline-event highlight">
+          <div class="timeline-month">02월</div>
+          <div class="timeline-desc"><p>주식회사 이비즈소프트 설립</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../image/이노가드-로고.png" alt="이노가드 로고">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인증 & 특허 | 이노가드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --primary: #1a56db;
+    --primary-dark: #0f3a8e;
+    --primary-light: #e8f0fe;
+    --primary-50: #f0f5ff;
+    --accent: #00c9a7;
+    --accent-light: #e6faf5;
+    --accent-dark: #00a88a;
+    --dark: #191f28;
+    --gray-900: #333d4b;
+    --gray-700: #4e5968;
+    --gray-600: #6b7684;
+    --gray-500: #8b95a1;
+    --gray-400: #b0b8c1;
+    --gray-200: #e5e8eb;
+    --gray-100: #f2f4f6;
+    --gray-50: #f9fafb;
+    --white: #ffffff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--gray-900);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 64px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  .header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-logo { height: 28px; display: flex; align-items: center; cursor: pointer; }
+  .header-logo a { height: 100%; }
+  .header-logo img { height: 100%; object-fit: contain; }
+  .header-nav { display: flex; align-items: center; height: 100%; }
+  .nav-item {
+    position: relative; height: 100%;
+    display: flex; align-items: center;
+    padding: 0 20px; font-size: 15px; font-weight: 500;
+    color: var(--gray-700); cursor: pointer; transition: color 0.2s;
+  }
+  .nav-item:hover { color: var(--dark); }
+  .mega-menu {
+    position: absolute; top: 64px;
+    background: var(--white);
+    border: 1px solid var(--gray-200); border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 0 24px; min-width: 200px;
+    box-shadow: var(--shadow-lg); overflow: hidden;
+    max-height: 0; opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, padding 0.35s ease;
+  }
+  .nav-item:hover .mega-menu {
+    max-height: 400px; opacity: 1;
+    padding-top: 16px; padding-bottom: 16px;
+  }
+  .mega-menu-wide { min-width: 420px; display: grid; grid-template-columns: 1fr 1fr; }
+  .mega-link {
+    display: block; padding: 8px 10px; margin: 2px -10px;
+    font-size: 14px; color: var(--gray-700); text-decoration: none;
+    border-radius: 8px; transition: var(--transition);
+  }
+  .mega-link:hover { background: var(--gray-50); color: var(--dark); }
+  .mega-link.active { color: var(--primary); font-weight: 600; }
+  .nav-contact {
+    margin-left: 16px; padding: 8px 20px;
+    background: var(--primary); color: var(--white);
+    font-size: 14px; font-weight: 600; border-radius: 8px;
+    border: none; cursor: pointer; transition: var(--transition);
+  }
+  .nav-contact:hover { background: var(--primary-dark); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    margin-top: 64px; padding: 80px 0 60px;
+    background: linear-gradient(135deg, #0a1628 0%, #0f2647 50%, #132f5a 100%);
+    position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .page-hero-inner {
+    position: relative; z-index: 1;
+    max-width: 1140px; margin: 0 auto; padding: 0 40px;
+  }
+  .page-breadcrumb { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+  .page-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .page-breadcrumb span { color: rgba(255,255,255,0.25); margin: 0 8px; }
+  .page-title { font-size: 36px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; }
+  .page-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 10px; font-weight: 300; }
+
+  /* ── SUB NAV ── */
+  .sub-nav {
+    background: var(--white); border-bottom: 1px solid var(--gray-200);
+    position: sticky; top: 64px; z-index: 50;
+  }
+  .sub-nav-inner {
+    max-width: 1140px; margin: 0 auto; padding: 0 40px; display: flex;
+  }
+  .sub-nav-link {
+    padding: 16px 24px; font-size: 14px; font-weight: 500;
+    color: var(--gray-500); text-decoration: none;
+    border-bottom: 2px solid transparent; transition: var(--transition);
+  }
+  .sub-nav-link:hover { color: var(--gray-700); }
+  .sub-nav-link.active { color: var(--primary); font-weight: 600; border-bottom-color: var(--primary); }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* ── SECTION COMMON ── */
+  .cert-section { margin-bottom: 80px; }
+  .cert-section:last-child { margin-bottom: 0; }
+  .cert-section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .cert-section-label.blue { color: var(--primary); }
+  .cert-section-label.green { color: var(--accent-dark); }
+  .cert-section-label.orange { color: #d97706; }
+  .cert-section-title {
+    font-size: 28px; font-weight: 800;
+    color: var(--dark); letter-spacing: -0.5px;
+    margin-bottom: 36px;
+  }
+
+  /* ── CARD GRID ── */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .cert-grid.col-3 { grid-template-columns: repeat(3, 1fr); }
+
+  .cert-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+  .cert-card:hover { box-shadow: var(--shadow-lg); }
+
+  .cert-card-img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--gray-50);
+    border-bottom: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .cert-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 16px;
+  }
+  .cert-card-img .ph {
+    font-size: 13px;
+    color: var(--gray-400);
+    text-align: center;
+    line-height: 1.5;
+  }
+  .cert-card-info {
+    padding: 16px 18px;
+  }
+  .cert-card-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 4px;
+    line-height: 1.4;
+    word-break: keep-all;
+  }
+  .cert-card-info p {
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.5;
+  }
+
+  /* award card — wider */
+  .award-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .award-card {
+    background: var(--white);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: var(--transition);
+    cursor: pointer;
+    display: flex;
+    gap: 0;
+  }
+  .award-card:hover { box-shadow: var(--shadow-lg); }
+  .award-card-img {
+    width: 140px;
+    flex-shrink: 0;
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .award-card-img img {
+    width: 100%; height: 100%;
+    object-fit: contain; padding: 12px;
+  }
+  .award-card-img .ph {
+    font-size: 12px; color: var(--gray-400);
+    text-align: center; line-height: 1.4;
+  }
+  .award-card-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .award-card-info h4 {
+    font-size: 15px; font-weight: 600;
+    color: var(--dark); margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .award-card-info p {
+    font-size: 13px; color: var(--gray-500);
+    line-height: 1.5;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark); padding: 52px 40px 32px;
+  }
+  .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .footer-top {
+    display: flex; justify-content: space-between;
+    align-items: flex-start; padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 24px; gap: 60px;
+  }
+  .footer-brand { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 14px; }
+  .footer-brand img { height: 28px; }
+  .footer-info p { font-size: 13px; line-height: 2; color: rgba(255,255,255,0.35); }
+  .footer-info strong { color: rgba(255,255,255,0.55); }
+  .footer-right { text-align: right; }
+  .footer-family-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .footer-links { display: flex; gap: 18px; }
+  .footer-links a { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4); text-decoration: none; transition: var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copyright { text-align: center; font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  /* ── ANIMATION ── */
+  .fade-up {
+    opacity: 0; transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="../index.html"><img src="../../image/이노가드-로고.png" alt="이노가드 로고"></a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link" href="sub1.html">인사말 / 비전</a>
+          <a class="mega-link" href="sub2.html">연혁</a>
+          <a class="mega-link active" href="sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="../saas/sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="../saas/sub2.html">홈 IoT</a>
+            <a class="mega-link" href="../saas/sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link" href="../saas/sub4.html">아파트ERP</a>
+            <a class="mega-link" href="../saas/sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="../solution/sub1.html">전자입찰</a>
+          <a class="mega-link" href="../solution/sub2.html">전자계약</a>
+          <a class="mega-link" href="../solution/sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      </div>
+      <button class="nav-contact">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ PAGE HERO ══════ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../index.html">홈</a>
+      <span>›</span>
+      <a href="sub1.html">회사소개</a>
+      <span>›</span>
+      인증 & 특허
+    </div>
+    <h1 class="page-title">인증 & 특허</h1>
+    <p class="page-subtitle">이노가드의 기술력과 신뢰를 증명하는 인증 및 특허 현황</p>
+  </div>
+</section>
+
+<!-- ══════ SUB NAV ══════ -->
+<nav class="sub-nav">
+  <div class="sub-nav-inner">
+    <a class="sub-nav-link" href="sub1.html">인사말 / 비전</a>
+    <a class="sub-nav-link" href="sub2.html">연혁</a>
+    <a class="sub-nav-link active" href="sub3.html">인증 & 특허</a>
+  </div>
+</nav>
+
+<!-- ══════ CONTENT ══════ -->
+<main class="content">
+
+  <!-- 특허 -->
+  <section class="cert-section fade-up">
+    <p class="cert-section-label blue">Patents</p>
+    <h2 class="cert-section-title">특허</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">특허 1<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>온라인상에서의 계약관리방법 및 시스템</h4>
+          <p>특허번호: 10-0886690</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">특허 2<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>온라인상에서의 입찰방법 및 시스템</h4>
+          <p>특허번호: 10-0886693</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">특허 3<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>TaaS 기반의 자산조달 관리장치</h4>
+          <p>특허번호: 10-2047277</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">특허 4<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>구매대리 시스템 및 방법</h4>
+          <p>특허번호: 10-2146544</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">특허 5<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>이동통신단말 기반 전문건설업체에서의 현장 정보 관리 시스템</h4>
+          <p>특허번호: 10-2146545</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">특허 6<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>공동주택의 공동구매 처리 장치</h4>
+          <p>특허번호: 10-2209262</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 수상 -->
+  <section class="cert-section fade-up delay-1">
+    <p class="cert-section-label orange">Awards</p>
+    <h2 class="cert-section-title">수상</h2>
+    <div class="award-grid">
+      <div class="award-card">
+        <div class="award-card-img">
+          <span class="ph">수상 1<br>이미지</span>
+        </div>
+        <div class="award-card-info">
+          <h4>공로패</h4>
+          <p>숭실대학교</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 인증 -->
+  <section class="cert-section fade-up delay-2">
+    <p class="cert-section-label green">Certifications</p>
+    <h2 class="cert-section-title">인증</h2>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 1<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>벤처기업</h4>
+          <p>기술보증기금</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 2<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>기업부설연구소</h4>
+          <p>한국산업기술진흥협회</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 3<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>소프트웨어사업자</h4>
+          <p>한국소프트웨어산업협회</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 4<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>경영혁신형 중소기업</h4>
+          <p>서울시 중소기업청</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 5<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>전자세금계산서 표준인증서</h4>
+          <p>한국전자거래진흥원</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 6<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>ASP 서비스 프로그램 등록증</h4>
+          <p>한국소프트웨어산업협회</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 7<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>하이서울브랜드기업 지정서</h4>
+          <p>서울특별시</p>
+        </div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-card-img">
+          <span class="ph">인증서 8<br>이미지</span>
+        </div>
+        <div class="cert-card-info">
+          <h4>통신판매업신고증</h4>
+          <p>서울특별시 구로구청</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../../image/이노가드-로고.png" alt="이노가드 로고">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

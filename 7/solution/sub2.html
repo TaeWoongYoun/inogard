@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전자계약 | 이노가드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --primary: #1a56db; --primary-dark: #0f3a8e; --primary-light: #e8f0fe; --primary-50: #f0f5ff;
+    --accent: #00c9a7; --accent-light: #e6faf5; --accent-dark: #00a88a;
+    --dark: #191f28; --gray-900: #333d4b; --gray-700: #4e5968; --gray-600: #6b7684;
+    --gray-500: #8b95a1; --gray-400: #b0b8c1; --gray-200: #e5e8eb; --gray-100: #f2f4f6;
+    --gray-50: #f9fafb; --white: #ffffff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.08);
+    --radius: 20px; --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans KR', -apple-system, sans-serif; background: var(--white); color: var(--gray-900); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* ── HEADER ── */
+  .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 64px; background: rgba(255,255,255,0.92); backdrop-filter: blur(24px); border-bottom: 1px solid rgba(0,0,0,0.05); transition: box-shadow 0.3s ease; }
+  .header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .header-inner { max-width: 1140px; margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .header-logo { height: 28px; display: flex; align-items: center; cursor: pointer; }
+  .header-logo a { height: 100%; }
+  .header-logo img { height: 100%; object-fit: contain; }
+  .header-nav { display: flex; align-items: center; height: 100%; }
+  .nav-item { position: relative; height: 100%; display: flex; align-items: center; padding: 0 20px; font-size: 15px; font-weight: 500; color: var(--gray-700); cursor: pointer; transition: color 0.2s; }
+  .nav-item:hover { color: var(--dark); }
+  .mega-menu { position: absolute; top: 64px; background: var(--white); border: 1px solid var(--gray-200); border-top: none; border-radius: 0 0 14px 14px; padding: 0 24px; min-width: 200px; box-shadow: var(--shadow-lg); overflow: hidden; max-height: 0; opacity: 0; transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, padding 0.35s ease; }
+  .nav-item:hover .mega-menu { max-height: 400px; opacity: 1; padding-top: 16px; padding-bottom: 16px; }
+  .mega-menu-wide { min-width: 420px; display: grid; grid-template-columns: 1fr 1fr; }
+  .mega-link { display: block; padding: 8px 10px; margin: 2px -10px; font-size: 14px; color: var(--gray-700); text-decoration: none; border-radius: 8px; transition: var(--transition); }
+  .mega-link:hover { background: var(--gray-50); color: var(--dark); }
+  .mega-link.active { color: var(--primary); font-weight: 600; }
+  .nav-contact { margin-left: 16px; padding: 8px 20px; background: var(--primary); color: var(--white); font-size: 14px; font-weight: 600; border-radius: 8px; border: none; cursor: pointer; transition: var(--transition); }
+  .nav-contact:hover { background: var(--primary-dark); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { margin-top: 64px; padding: 80px 0 60px; background: linear-gradient(135deg, #0a1628 0%, #0f2647 50%, #132f5a 100%); position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 64px 64px; }
+  .page-hero-inner { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 0 40px; }
+  .page-breadcrumb { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+  .page-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .page-breadcrumb span { color: rgba(255,255,255,0.25); margin: 0 8px; }
+  .page-title { display: flex; align-items: center; gap: 16px; }
+  .page-title-icon { width: 44px; height: 44px; background: rgba(0,201,167,0.15); border: 1px solid rgba(0,201,167,0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+  .page-title-icon img { width: 28px; height: 28px; object-fit: contain; }
+  .page-title-icon .ph { font-size: 10px; color: var(--accent); }
+  .page-title h1 { font-size: 36px; font-weight: 800; color: var(--white); letter-spacing: -0.5px; }
+  .page-subtitle { font-size: 16px; color: rgba(255,255,255,0.5); margin-top: 10px; font-weight: 300; }
+
+  /* ── SUB NAV ── */
+  .sub-nav { background: var(--white); border-bottom: 1px solid var(--gray-200); position: sticky; top: 64px; z-index: 50; }
+  .sub-nav-inner { max-width: 1140px; margin: 0 auto; padding: 0 40px; display: flex; }
+  .sub-nav-link { padding: 16px 24px; font-size: 14px; font-weight: 500; color: var(--gray-500); text-decoration: none; border-bottom: 2px solid transparent; transition: var(--transition); }
+  .sub-nav-link:hover { color: var(--gray-700); }
+  .sub-nav-link.active { color: var(--primary); font-weight: 600; border-bottom-color: var(--primary); }
+
+  /* ── CONTENT ── */
+  .content { max-width: 1140px; margin: 0 auto; padding: 80px 40px 120px; }
+  .sec { margin-bottom: 80px; }
+  .sec:last-child { margin-bottom: 0; }
+  .sec-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .sec-label.blue { color: var(--primary); }
+  .sec-label.green { color: var(--accent-dark); }
+  .sec-title { font-size: 28px; font-weight: 800; color: var(--dark); letter-spacing: -0.5px; margin-bottom: 36px; }
+
+  /* ── INTRO ── */
+  .intro { display: flex; gap: 64px; align-items: flex-start; }
+  .intro-text { flex: 1; min-width: 0; }
+  .intro-text .sec-title { font-size: 32px; }
+  .intro-desc { font-size: 16px; color: var(--gray-600); line-height: 1.9; word-break: keep-all; }
+  .intro-desc p { margin-bottom: 16px; }
+  .intro-desc p:last-child { margin-bottom: 0; }
+  .intro-image { flex-shrink: 0; width: 440px; height: 320px; border-radius: var(--radius); background: var(--gray-100); box-shadow: var(--shadow-card); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .intro-image .ph { font-size: 14px; color: var(--gray-400); text-align: center; }
+
+  /* ── EFFECT CARDS ── */
+  .effect-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .effect-card { background: var(--white); border-radius: var(--radius-sm); box-shadow: var(--shadow-card); padding: 32px 28px; transition: var(--transition); }
+  .effect-card:hover { box-shadow: var(--shadow-lg); }
+  .effect-card h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+  .effect-card p { font-size: 14px; color: var(--gray-600); line-height: 1.7; word-break: keep-all; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box { background: var(--gray-50); border-radius: var(--radius); padding: 48px; display: flex; gap: 48px; align-items: flex-start; }
+  .highlight-text { flex: 1; }
+  .highlight-text h3 { font-family: 'Inter', sans-serif; font-size: 22px; font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+  .highlight-text .hl-sub { font-size: 14px; color: var(--gray-500); margin-bottom: 20px; }
+  .highlight-text .hl-desc { font-size: 15px; color: var(--gray-600); line-height: 1.8; word-break: keep-all; margin-bottom: 24px; }
+  .hl-features { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .hl-feat { display: flex; gap: 10px; align-items: flex-start; }
+  .hl-feat-icon { flex-shrink: 0; width: 28px; height: 28px; border-radius: 8px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .hl-feat-icon svg { width: 14px; height: 14px; stroke: var(--accent-dark); stroke-width: 2.5; fill: none; }
+  .hl-feat-text h5 { font-size: 14px; font-weight: 600; color: var(--dark); margin-bottom: 2px; }
+  .hl-feat-text p { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+  .highlight-image { flex-shrink: 0; width: 280px; height: 220px; border-radius: var(--radius-sm); background: var(--gray-200); display: flex; align-items: center; justify-content: center; }
+  .highlight-image .ph { font-size: 13px; color: var(--gray-400); text-align: center; }
+
+  /* ── AFTER CARD ── */
+  .after-card { background: var(--primary-50); border-radius: var(--radius-sm); padding: 36px 32px; }
+  .after-card p { font-size: 16px; color: var(--gray-700); line-height: 1.85; word-break: keep-all; }
+
+  /* ── FOOTER ── */
+  .footer { background: var(--dark); padding: 52px 40px 32px; }
+  .footer-inner { max-width: 1140px; margin: 0 auto; }
+  .footer-top { display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px; gap: 60px; }
+  .footer-brand { font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 800; color: var(--white); margin-bottom: 14px; }
+  .footer-brand img { height: 28px; }
+  .footer-info p { font-size: 13px; line-height: 2; color: rgba(255,255,255,0.35); }
+  .footer-info strong { color: rgba(255,255,255,0.55); }
+  .footer-right { text-align: right; }
+  .footer-family-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.25); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .footer-links { display: flex; gap: 18px; }
+  .footer-links a { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.4); text-decoration: none; transition: var(--transition); }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copyright { text-align: center; font-size: 12px; color: rgba(255,255,255,0.18); }
+
+  .fade-up { opacity: 0; transform: translateY(36px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="../index.html"><img src="../../image/이노가드-로고.png" alt="이노가드 로고"></a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link" href="../introduce/sub1.html">인사말 / 비전</a>
+          <a class="mega-link" href="../introduce/sub2.html">연혁</a>
+          <a class="mega-link" href="../introduce/sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="../saas/sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="../saas/sub2.html">홈 IoT</a>
+            <a class="mega-link" href="../saas/sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link" href="../saas/sub4.html">아파트ERP</a>
+            <a class="mega-link" href="../saas/sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="sub1.html">전자입찰</a>
+          <a class="mega-link active" href="sub2.html">전자계약</a>
+          <a class="mega-link" href="sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      <button class="nav-contact">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ PAGE HERO ══════ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../index.html">홈</a>
+      <span>›</span>
+      솔루션
+      <span>›</span>
+      전자계약
+    </div>
+    <div class="page-title">
+      <div class="page-title-icon">
+        <img src="../../image/전자계약.png" alt="전자계약 아이콘" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+        <span class="ph" style="display:none;">아이콘</span>
+      </div>
+      <h1>전자계약</h1>
+    </div>
+    <p class="page-subtitle">공인인증서로 사인하고, 계약을 온라인으로 간편하게</p>
+  </div>
+</section>
+
+<!-- ══════ SUB NAV ══════ -->
+<nav class="sub-nav">
+  <div class="sub-nav-inner">
+    <a class="sub-nav-link" href="sub1.html">전자입찰</a>
+    <a class="sub-nav-link active" href="sub2.html">전자계약</a>
+    <a class="sub-nav-link" href="sub3.html">전자세금계산서</a>
+  </div>
+</nav>
+
+<!-- ══════ CONTENT ══════ -->
+<main class="content">
+
+  <!-- 소개 -->
+  <section class="sec intro fade-up">
+    <div class="intro-text">
+      <p class="sec-label green">E-Contract</p>
+      <h2 class="sec-title">온라인으로 완결되는 전자계약</h2>
+      <div class="intro-desc">
+        <p>전자계약은 인터넷으로 계약서를 주고받고, 공인인증서로 서명하여 계약을 체결하는 방식입니다. 종이 계약서의 인쇄, 우편, 보관 과정을 모두 생략하고 온라인에서 간편하게 계약을 마무리할 수 있습니다.</p>
+        <p>ERP 시스템과 연동되어 이미 입력된 정보를 불러와 계약서를 자동으로 생성하기 때문에 2중 입력이 필요 없으며, 여러 문서를 하나로 묶어 통째로 서명하는 방식으로 간인 절차도 사라집니다.</p>
+      </div>
+    </div>
+    <div class="intro-image">
+      <span class="ph">전자계약 서비스 이미지경로</span>
+    </div>
+  </section>
+
+  <!-- 기대 효과 -->
+  <section class="sec fade-up delay-1">
+    <p class="sec-label blue">Expected Benefits</p>
+    <h2 class="sec-title">기대 효과</h2>
+    <div class="effect-grid">
+      <div class="effect-card">
+        <h4>2중 입력 방지</h4>
+        <p>ERP와 연동되어 이미 입력된 정보를 불러와 계약서를 자동 생성합니다. 같은 데이터를 두 번 입력하는 번거로움이 사라집니다.</p>
+      </div>
+      <div class="effect-card">
+        <h4>간인 필요 없음</h4>
+        <p>여러 문서를 하나로 묶어(Zip) 통째로 서명하기 때문에 문서 누락이나 변조가 불가능하며, 종이 계약서의 간인 절차가 필요 없습니다.</p>
+      </div>
+      <div class="effect-card">
+        <h4>인지세 절감</h4>
+        <p>종이값, 우편비는 물론이고 전자계약 시 인지세도 절감됩니다. 계약 건수가 많을수록 절감 효과가 커집니다.</p>
+      </div>
+      <div class="effect-card">
+        <h4>가점 혜택</h4>
+        <p>건설업자 간 상호협력 평가나 PQ 심사 때 신인도 가점을 받을 수 있어 영업에도 유리합니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CoreContractManager -->
+  <section class="sec fade-up delay-2">
+    <p class="sec-label green">Support Tool</p>
+    <h2 class="sec-title">CoreContractManager</h2>
+    <div class="highlight-box">
+      <div class="highlight-text">
+        <h3>CoreContractManager</h3>
+        <p class="hl-sub">계약서 관리를 자동화하는 전용 툴</p>
+        <p class="hl-desc">사용자가 계약서를 일일이 다운로드하고 업로드하는 과정을 자동화한 전용 프로그램입니다.</p>
+        <div class="hl-features">
+          <div class="hl-feat">
+            <div class="hl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="hl-feat-text">
+              <h5>자동 압축/해제</h5>
+              <p>계약서, 내역서, 특수조건 등 수많은 파일을 하나로 묶어 관리합니다.</p>
+            </div>
+          </div>
+          <div class="hl-feat">
+            <div class="hl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="hl-feat-text">
+              <h5>실시간 변조 검사</h5>
+              <p>로컬 파일과 서버 파일을 비교해 0.1mm의 수정도 즉시 감지합니다.</p>
+            </div>
+          </div>
+          <div class="hl-feat">
+            <div class="hl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="hl-feat-text">
+              <h5>원클릭 조회</h5>
+              <p>프로그램 안에서 더블 클릭하면 Excel, Word 등이 바로 실행됩니다.</p>
+            </div>
+          </div>
+          <div class="hl-feat">
+            <div class="hl-feat-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div class="hl-feat-text">
+              <h5>자동 업로드</h5>
+              <p>서명만 하면 서버로 자동 전송됩니다. 파일 찾기 버튼을 누를 일이 없습니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="highlight-image">
+        <span class="ph">CoreContractManager<br>이미지경로</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 사후 관리 -->
+  <section class="sec fade-up delay-3">
+    <p class="sec-label blue">After Service</p>
+    <h2 class="sec-title">사후 관리</h2>
+    <div class="after-card">
+      <p>계약 체결 이후에도 보증보험 온라인 연계 및 관리 기능을 통해, 계약 이행 보증부터 하자 보증까지 체계적으로 관리할 수 있습니다. 별도의 보험사 방문 없이 시스템 내에서 보증보험 업무를 처리할 수 있어 계약 전 과정의 디지털화를 완성합니다.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../../image/이노가드-로고.png" alt="이노가드 로고">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

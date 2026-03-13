@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이노가드 | INOGARD</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="../image/이노가드-로고.png" alt="이노가드 로고" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link" href="./introduce/sub1.html">인사말 / 비전</a>
+          <a class="mega-link" href="./introduce/sub2.html">연혁</a>
+          <a class="mega-link" href="./introduce/sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="./saas/sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="./saas/sub2.html">홈 IoT</a>
+            <a class="mega-link" href="./saas/sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link" href="./saas/sub4.html">아파트ERP</a>
+            <a class="mega-link" href="./saas/sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="./solution/sub1.html">전자입찰</a>
+          <a class="mega-link" href="./solution/sub2.html">전자계약</a>
+          <a class="mega-link" href="./solution/sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      <button class="nav-contact" onclick="openModal()">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="../image/Gemini_Generated_Image_egzlcfegzlcfegzl.png" alt="배경 이미지">
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text fade-up">
+      <div class="hero-badge">SaaS 전자구매 플랫폼</div>
+      <h1 class="hero-title">
+        구매 비용 절감,<br>
+        <span class="accent">전자조달</span>을 통한
+        합리적인 구매
+      </h1>
+      <p class="hero-desc">
+        대학교 및 중소기업 전용 SaaS 전자구매 시스템과 홈 IoT 플랫폼.<br>
+        이노가드는 20년간 증명된 기술로 선진화된 경영 환경을 구축합니다.
+      </p>
+    </div>
+    <div class="hero-image fade-up delay-2">
+      <img src="../image/content.png" alt="컨텐츠 이미지" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <span class="ph" style="display:none;">컨텐츠 이미지경로</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ eBiz4U ══════ -->
+<section class="service-section">
+  <div class="service-inner">
+    <div class="service-text fade-up">
+      <div class="service-tags">
+        <span class="service-tag"># 전자입찰</span>
+        <span class="service-tag"># 전자계약</span>
+        <span class="service-tag"># 세금계산서</span>
+      </div>
+      <h2 class="service-heading">최적의 전자조달 서비스</h2>
+      <p class="service-en">EBIZ4U</p>
+      <p class="service-desc">
+        약 300개 대학교 및 대학교 부속기관이 이용하는 이비즈포유는 전자견적/입찰을 통한 업체선정, 전자계약 체결, 전자세금계산서 교부 등의 전자구매플랫폼이며 발주기관에 무상으로 제공됩니다. 구매의뢰부터 검수까지 일련의 구매업무를 온라인으로 지원하여, 평균 구매 원가 13%를 절감하고 전자계약 시 인지세 50%를 줄여드립니다.
+      </p>
+      <a href="#" class="service-link">
+        서비스 바로가기
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="service-image fade-up delay-1">
+      <img src="../image/{29B30CBD-46E6-43BE-9EA9-9EBA4B9AAF28}.png" alt="eBiz4U 서비스 이미지" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <span class="ph" style="display:none;">eBiz4U 서비스 이미지경로</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ UNIVERSITY LOGO SLIDER ══════ -->
+<div class="logo-slider">
+  <div class="logo-slider__track">
+    <span class="logo-slider__item">숭실대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">경희대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">이화여자대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">성균관대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">연세대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">건국대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">한성대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">동덕여자대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">서울여자대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">광운대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">홍익대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">원광대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">인하대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">인덕대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">대진대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <!-- duplicated for seamless loop -->
+    <span class="logo-slider__item">숭실대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">경희대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">이화여자대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">성균관대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">연세대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">건국대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">한성대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">동덕여자대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">서울여자대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">광운대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">홍익대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">원광대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">인하대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">인덕대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+    <span class="logo-slider__item">대진대학교</span>
+    <span class="logo-slider__item"><span class="dot"></span></span>
+  </div>
+</div>
+
+<!-- ══════ Home IoT (reversed) ══════ -->
+<section class="service-section" style="background: var(--gray-50);">
+  <div class="service-inner reverse">
+    <div class="service-text fade-up">
+      <div class="service-tags">
+        <span class="service-tag"># 스마트홈</span>
+        <span class="service-tag"># 커뮤니티</span>
+        <span class="service-tag"># 관리비 조회</span>
+        <span class="service-tag"># 시설 예약</span>
+      </div>
+      <h2 class="service-heading">입주민 통합 생활 플랫폼</h2>
+      <p class="service-en">HOME IoT</p>
+      <p class="service-desc">
+        이노가드의 홈 IoT는 단순한 기기 제어를 넘어 아파트 관리비 조회부터 커뮤니티 운영, 하자 관리까지 아우르는 입주민 통합 생활 플랫폼입니다. 다양한 아파트 브랜드에 적용된 경험을 바탕으로 단지별 특성에 따라 유연하게 동작하는 동적 시설 예약 시스템과 ERP 연동 기술을 통해 스마트홈의 완성도를 높여드립니다.
+      </p>
+      <a href="#" class="service-link">
+        서비스 바로가기
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="service-image fade-up delay-1">
+      <img src="../image/{ABA3A655-63AD-452A-B23C-EBC279F7CB48}.png" alt="Home IoT 서비스 이미지" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+      <span class="ph" style="display:none;">Home IoT 서비스 이미지경로</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ SaaS 서비스 ══════ -->
+<section class="saas-section">
+  <div class="saas-inner">
+    <div class="saas-header fade-up">
+      <p class="saas-label">SaaS Services</p>
+      <h2 class="saas-heading">SaaS 기반의 최적화된 솔루션을 제공하고 있습니다.</h2>
+      <p class="saas-sub">초기 비용 부담 없이, 필요한 만큼 사용하는 클라우드 서비스</p>
+    </div>
+    <div class="saas-cards">
+      <div class="saas-card fade-up delay-1">
+        <h3>아파트비드포유</h3>
+        <p class="saas-card-en">AptBid4U</p>
+        <p>2015년부터 의무화된 주택관리업자 및 사업자 선정 전자입찰을 국토교통부 승인 하에 공고부터 낙찰까지 원스톱으로 처리합니다. 아파트 운영에 필요한 용역, 공사, 자재까지 모든 계약을 한곳에서 간편하게 진행할 수 있습니다.</p>
+        <a href="#" class="saas-card-link">
+          자세히 보기
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="saas-card fade-up delay-2">
+        <h3>AptERP</h3>
+        <p class="saas-card-en">Apartment ERP</p>
+        <p>입주민, 대표회의, 관리업체, 국가기관까지 모두 연결하는 아파트 통합 포털 시스템입니다. 관리비 부과, 자동이체, 에너지 검침은 물론 전자결재, 전자투표, 장기수선계획까지 SaaS 방식으로 제공하여 도입 비용을 절감합니다.</p>
+        <a href="#" class="saas-card-link">
+          자세히 보기
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="saas-card fade-up delay-3">
+        <h3>엡스</h3>
+        <p class="saas-card-en">EEPSS</p>
+        <p>전자조달시스템 구축에 필요한 초기 투자비, 개발 인력, 전산 환경 고민 없이 월정액으로 이용할 수 있는 서비스입니다. 전자입찰, 전자계약, 전자세금계산서, 협력사 관리까지 중소기업에 최적화된 전자조달 환경을 제공합니다.</p>
+        <a href="#" class="saas-card-link">
+          자세히 보기
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ 전자조달 솔루션 ══════ -->
+<section class="sol-section">
+  <div class="sol-inner">
+    <div class="sol-header fade-up">
+      <p class="sol-label">Procurement Solutions</p>
+      <h2 class="sol-heading">20년간 검증된 전자조달 솔루션</h2>
+      <p class="sol-sub">300개 대학과 38,000개 기업이 선택한 전자조달, 그 이유가 있습니다.</p>
+    </div>
+    <div class="sol-cards">
+      <div class="sol-card fade-up delay-1">
+        <div class="sol-card-icon">
+          <img src="../image/전자입찰.png" alt="전자입찰 아이콘">
+        </div>
+        <h3>전자입찰</h3>
+        <p class="sol-desc">인터넷으로 공고 검색부터 입찰 참여까지 전 과정을 수행하며, BizEditor를 통해 문서 작성과 제출이 한 번에 이루어집니다.</p>
+        <div class="sol-effect">
+          <div class="effect-label">기대 효과</div>
+          <p class="effect-text">업무 효율성 향상, 비용 절감, 투명성 확보</p>
+        </div>
+      </div>
+      <div class="sol-card fade-up delay-2">
+        <div class="sol-card-icon">
+          <img src="../image/전자계약.png" alt="전자계약 아이콘">
+        </div>
+        <h3>전자계약</h3>
+        <p class="sol-desc">공인인증서 기반으로 온라인 계약을 체결하며 CoreContractManager를 통해 계약서의 실시간 변조 검사를 지원합니다.</p>
+        <div class="sol-effect">
+          <div class="effect-label">기대 효과</div>
+          <p class="effect-text">2중 입력 방지, 인지세 절감, 가점 혜택</p>
+        </div>
+      </div>
+      <div class="sol-card fade-up delay-3">
+        <div class="sol-card-icon">
+          <img src="../image/전자세금계산서.png" alt="전자세금계산서 아이콘">
+        </div>
+        <h3>전자세금계산서</h3>
+        <p class="sol-desc">국세청 3.0 표준을 준수하며 ERP 연계와 자동 구분·전송 모듈을 통해 세금계산서 처리를 간소화합니다.</p>
+        <div class="sol-effect">
+          <div class="effect-label">기대 효과</div>
+          <p class="effect-text">업무 효율성 향상, 비용 절감, 정확성 확보</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ 실적 & 신뢰 지표 ══════ -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div class="stats-header fade-up">
+      <p class="stats-label">Trust & Performance</p>
+      <h2 class="stats-heading">신뢰와 실적이 증명합니다</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <div class="stat-ring">
+          <svg viewBox="0 0 76 76">
+            <circle class="ring-bg" cx="38" cy="38" r="33"/>
+            <circle class="ring-fill" cx="38" cy="38" r="33" data-percent="80"/>
+          </svg>
+          <span class="ring-text">300+</span>
+        </div>
+        <div class="stat-num">300<span class="suffix">+</span></div>
+        <div class="stat-label">Partner Institutions</div>
+      </div>
+      <div class="stat-card fade-up delay-2">
+        <div class="stat-ring">
+          <svg viewBox="0 0 76 76">
+            <circle class="ring-bg" cx="38" cy="38" r="33"/>
+            <circle class="ring-fill" cx="38" cy="38" r="33" data-percent="70"/>
+          </svg>
+          <span class="ring-text">38K+</span>
+        </div>
+        <div class="stat-num">38,000<span class="suffix">+</span></div>
+        <div class="stat-label">Supplier Network</div>
+      </div>
+      <div class="stat-card fade-up delay-3">
+        <div class="stat-ring">
+          <svg viewBox="0 0 76 76">
+            <circle class="ring-bg" cx="38" cy="38" r="33"/>
+            <circle class="ring-fill" cx="38" cy="38" r="33" data-percent="90"/>
+          </svg>
+          <span class="ring-text">20Y+</span>
+        </div>
+        <div class="stat-num">20<span class="unit">Year+</span></div>
+        <div class="stat-label">Operation History</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-ring">
+          <svg viewBox="0 0 76 76">
+            <circle class="ring-bg" cx="38" cy="38" r="33"/>
+            <circle class="ring-fill" cx="38" cy="38" r="33" data-percent="40"/>
+          </svg>
+          <span class="ring-text">6</span>
+        </div>
+        <div class="stat-num">6<span class="unit">Patents</span></div>
+        <div class="stat-label">핵심 특허 보유</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+            <img src="../image/이노가드-로고.png" alt="이노가드 로고" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ══════ CONTACT MODAL ══════ -->
+<div class="modal-overlay" id="contactModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2>문의하기</h2>
+    <p class="modal-sub">궁금한 점이 있으시면 아래 양식을 작성해주세요.</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>회사명</label>
+        <input type="text" placeholder="회사명을 입력하세요">
+      </div>
+      <div class="form-group">
+        <label>담당자명</label>
+        <input type="text" placeholder="담당자명">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>연락처</label>
+        <input type="tel" placeholder="010-0000-0000">
+      </div>
+      <div class="form-group">
+        <label>이메일</label>
+        <input type="email" placeholder="email@example.com">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>문의 유형</label>
+      <select>
+        <option>전자조달 (eBiz4U)</option>
+        <option>홈 IoT</option>
+        <option>아파트비드포유</option>
+        <option>아파트ERP</option>
+        <option>엡스 (eepss)</option>
+        <option>기타 문의</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>문의 내용</label>
+      <textarea placeholder="문의하실 내용을 입력하세요"></textarea>
+    </div>
+    <button class="modal-submit">문의 접수하기</button>
+  </div>
+</div>
+
+<script src="index.js"></script>
+</body>
+</html>

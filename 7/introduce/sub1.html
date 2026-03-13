@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인사말 / 비전 | 이노가드</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+  :root {
+    --primary: #1a56db;
+    --primary-dark: #0f3a8e;
+    --primary-light: #e8f0fe;
+    --primary-50: #f0f5ff;
+    --accent: #00c9a7;
+    --accent-light: #e6faf5;
+    --accent-dark: #00a88a;
+    --navy: #0d1b3e;
+    --dark: #191f28;
+    --gray-900: #333d4b;
+    --gray-700: #4e5968;
+    --gray-600: #6b7684;
+    --gray-500: #8b95a1;
+    --gray-400: #b0b8c1;
+    --gray-200: #e5e8eb;
+    --gray-100: #f2f4f6;
+    --gray-50: #f9fafb;
+    --white: #ffffff;
+    --shadow-card: 0 2px 8px rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 28px rgba(0,0,0,0.08);
+    --radius: 20px;
+    --radius-sm: 12px;
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--gray-900);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER (메인과 동일) ── */
+  .header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 64px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
+  }
+  .header.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
+  .header-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-logo {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .header-logo a{
+height: 100%; 
+  }
+  .header-logo img { height: 100%;  object-fit: contain;}
+  .header-nav {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+  .nav-item:hover { color: var(--dark); }
+  .mega-menu {
+    position: absolute;
+    top: 64px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 0 24px;
+    min-width: 200px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease, padding 0.35s ease;
+  }
+  .nav-item:hover .mega-menu {
+    max-height: 400px;
+    opacity: 1;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .mega-menu-wide {
+    min-width: 420px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .mega-link {
+    display: block;
+    padding: 8px 10px;
+    margin: 2px -10px;
+    font-size: 14px;
+    color: var(--gray-700);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: var(--transition);
+  }
+  .mega-link:hover { background: var(--gray-50); color: var(--dark); }
+  .mega-link.active { color: var(--primary); font-weight: 600; }
+  .nav-contact {
+    margin-left: 16px;
+    padding: 8px 20px;
+    background: var(--primary);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .nav-contact:hover { background: var(--primary-dark); }
+
+  /* ── PAGE HERO BANNER ── */
+  .page-hero {
+    margin-top: 64px;
+    padding: 80px 0 60px;
+    background: linear-gradient(135deg, #0a1628 0%, #0f2647 50%, #132f5a 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .page-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .page-breadcrumb {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+  }
+  .page-breadcrumb a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .page-breadcrumb a:hover { color: rgba(255,255,255,0.7); }
+  .page-breadcrumb span { color: rgba(255,255,255,0.25); margin: 0 8px; }
+  .page-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .page-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 10px;
+    font-weight: 300;
+  }
+
+  /* ── SUB NAV TABS ── */
+  .sub-nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    position: sticky;
+    top: 64px;
+    z-index: 50;
+  }
+  .sub-nav-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    gap: 0;
+  }
+  .sub-nav-link {
+    padding: 16px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-500);
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+  }
+  .sub-nav-link:hover { color: var(--gray-700); }
+  .sub-nav-link.active {
+    color: var(--primary);
+    font-weight: 600;
+    border-bottom-color: var(--primary);
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 80px 40px 120px;
+  }
+
+  /* CEO 인사말 */
+  .greeting-section {
+    display: flex;
+    gap: 64px;
+    align-items: flex-start;
+    margin-bottom: 100px;
+  }
+  .greeting-left { flex: 1; min-width: 0; }
+  .greeting-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .greeting-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+    line-height: 1.35;
+    margin-bottom: 32px;
+  }
+  .greeting-text {
+    font-size: 16px;
+    color: var(--gray-600);
+    line-height: 1.9;
+    word-break: keep-all;
+  }
+  .greeting-text p { margin-bottom: 20px; }
+  .greeting-text p:last-child { margin-bottom: 0; }
+  .greeting-sign {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .greeting-sign .sign-company {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-bottom: 4px;
+  }
+  .greeting-sign .sign-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--dark);
+  }
+  .greeting-sign .sign-title {
+    font-size: 14px;
+    color: var(--gray-500);
+    margin-top: 2px;
+  }
+  .greeting-photo {
+    flex-shrink: 0;
+    width: 320px;
+    height: 400px;
+    border-radius: var(--radius);
+    background: var(--gray-100);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+  .greeting-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .greeting-photo .ph {
+    font-size: 14px;
+    color: var(--gray-400);
+    text-align: center;
+  }
+
+  /* 회사 개요 */
+  .overview-section {}
+  .overview-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent-dark);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .overview-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+    margin-bottom: 48px;
+  }
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .overview-table tr {
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .overview-table tr:last-child { border-bottom: none; }
+  .overview-table th {
+    width: 160px;
+    padding: 20px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    text-align: left;
+    vertical-align: top;
+    background: var(--gray-50);
+    border-right: 1px solid var(--gray-100);
+  }
+  .overview-table td {
+    padding: 20px 28px;
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+  .overview-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+  }
+
+  /* ── FOOTER (메인과 동일) ── */
+  .footer {
+    background: var(--dark);
+    padding: 52px 40px 32px;
+  }
+  .footer-inner {
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 24px;
+    gap: 60px;
+  }
+  .footer-brand {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .footer-brand img { height: 28px; }
+  .footer-info p {
+    font-size: 13px;
+    line-height: 2;
+    color: rgba(255,255,255,0.35);
+  }
+  .footer-info strong { color: rgba(255,255,255,0.55); }
+  .footer-right { text-align: right; }
+  .footer-family-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .footer-links { display: flex; gap: 18px; }
+  .footer-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: var(--transition);
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-copyright {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.18);
+  }
+
+  /* ── ANIMATION ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+</style>
+</head>
+<body>
+
+<!-- ══════ HEADER ══════ -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <div class="header-logo">
+      <a href="../index.html"><img src="../../image/이노가드-로고.png" alt="이노가드 로고"></a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-item">
+        회사소개
+        <div class="mega-menu">
+          <a class="mega-link active" href="sub1.html">인사말 / 비전</a>
+          <a class="mega-link" href="sub2.html">연혁</a>
+          <a class="mega-link" href="sub3.html">인증 & 특허</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        사업부문
+        <div class="mega-menu mega-menu-wide">
+          <div>
+            <a class="mega-link" href="../saas/sub1.html">이비즈포유 (eBiz4U)</a>
+            <a class="mega-link" href="../saas/sub2.html">홈 IoT</a>
+            <a class="mega-link" href="../saas/sub3.html">아파트비드포유</a>
+          </div>
+          <div>
+            <a class="mega-link" href="../saas/sub4.html">아파트ERP</a>
+            <a class="mega-link" href="../saas/sub5.html">엡스 (eepss)</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        솔루션
+        <div class="mega-menu">
+          <a class="mega-link" href="../solution/sub1.html">전자입찰</a>
+          <a class="mega-link" href="../solution/sub2.html">전자계약</a>
+          <a class="mega-link" href="../solution/sub3.html">전자세금계산서</a>
+        </div>
+      </div>
+      <button class="nav-contact">문의 & 고객지원</button>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════ PAGE HERO ══════ -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-breadcrumb">
+      <a href="../index.html">홈</a>
+      <span>›</span>
+      <a href="sub1.html">회사소개</a>
+      <span>›</span>
+      인사말 / 비전
+    </div>
+    <h1 class="page-title">인사말 / 비전</h1>
+    <p class="page-subtitle">이노가드의 철학과 미래를 소개합니다.</p>
+  </div>
+</section>
+
+<!-- ══════ SUB NAV ══════ -->
+<nav class="sub-nav">
+  <div class="sub-nav-inner">
+    <a class="sub-nav-link active" href="sub1.html">인사말 / 비전</a>
+    <a class="sub-nav-link" href="sub2.html">연혁</a>
+    <a class="sub-nav-link" href="sub3.html">인증 & 특허</a>
+  </div>
+</nav>
+
+<!-- ══════ CONTENT ══════ -->
+<main class="content">
+
+  <!-- CEO 인사말 -->
+  <section class="greeting-section fade-up">
+    <div class="greeting-left">
+      <p class="greeting-label">CEO Message</p>
+      <h2 class="greeting-title">고객이 원하는 최적의<br>구매환경을 제공하겠습니다</h2>
+      <div class="greeting-text">
+        <p>안녕하십니까? 이노가드 대표이사 최용기입니다. 이노가드를 찾아주신 고객 여러분께 감사를 드립니다.</p>
+        <p>저희 이노가드는 국내의 우수한 젊은 인재들로 구성되어 끊임없는 연구개발과 대기업 및 공공기관의 다양한 성공수행 경험을 바탕으로 최고의 고객만족 서비스를 실천하고 있습니다. 또한 대학교 및 중소기업을 중심으로 전자구매 시스템을 SaaS 방식으로 서비스를 제공하며, 고객이 요구하는 다양한 기술을 구현하고 선진 구매환경을 통하여 최고의 가치를 이룰 수 있도록 노력하고 있습니다.</p>
+        <p>지금 기업의 비즈니스 환경은 끊임없는 변화와 혁신을 요구하고 있습니다. 이러한 흐름 속에서 당사는 기업들의 요구에 맞는 구매환경을 새로이 구축하고, 기업의 실정에 맞게 그동안 수많은 프로젝트를 수행하면서 쌓아온 기술력과 노하우를 바탕으로 최적의 시스템 구축을 위해 노력을 아끼지 않을 것입니다.</p>
+        <p>앞으로 저희 이노가드는 고객의 요구가 회사의 밑거름이라 생각하고, 보다 겸손한 자세로 서로 상생할 수 있도록 철저한 분석과 연구개발을 통해 고객이 원하는 최적의 구매환경을 제공해 드리겠습니다. 늘 새로운 마음으로 도전할 수 있도록 많은 격려와 지도 부탁드립니다. 감사합니다.</p>
+      </div>
+      <div class="greeting-sign">
+        <p class="sign-company">주식회사 이노가드</p>
+        <p class="sign-name">대표이사 최용기</p>
+      </div>
+    </div>
+    <div class="greeting-photo">
+      <img src="" alt="CEO 이미지" style="display:none;">
+      <span class="ph">CEO 이미지</span>
+    </div>
+  </section>
+
+  <!-- 회사 개요 -->
+  <section class="overview-section fade-up delay-1">
+    <p class="overview-label">Company Overview</p>
+    <h2 class="overview-title">회사 개요</h2>
+    <div class="overview-card">
+      <table class="overview-table">
+        <tr>
+          <th>회사명</th>
+          <td>주식회사 이노가드</td>
+        </tr>
+        <tr>
+          <th>영문명</th>
+          <td>INOGARD COMPANY LTD</td>
+        </tr>
+        <tr>
+          <th>대표이사</th>
+          <td>최용기</td>
+        </tr>
+        <tr>
+          <th>설립일</th>
+          <td>2007년 6월 22일</td>
+        </tr>
+        <tr>
+          <th>주요사업</th>
+          <td>전자조달(전자입찰, 전자계약, 전자세금계산서, 전자보증, 기타) 시스템 구축, 전자조달시스템 SaaS, 컨설팅, 소프트웨어 리셀링, 구매대행</td>
+        </tr>
+        <tr>
+          <th>주소</th>
+          <td>서울특별시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호</td>
+        </tr>
+        <tr>
+          <th>연락처</th>
+          <td>TEL: 02)869-2730 &nbsp;/&nbsp; FAX: 02)6499-2729</td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════ FOOTER ══════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../image/이노가드-로고.png" alt="이노가드 로고">
+        </div>
+        <div class="footer-info">
+          <p>
+            <strong>주식회사 이노가드</strong> | 대표이사 최용기 | 사업자번호 113-86-14764<br>
+            TEL 02-869-2730 | FAX 02-6499-2729<br>
+            (08376) 서울시 구로구 디지털로31길 38-21(이앤씨벤처드림타워3차) 209호
+          </p>
+        </div>
+      </div>
+      <div class="footer-right">
+        <div class="footer-family-title">Family Sites</div>
+        <div class="footer-links">
+          <a href="#">eBiz4U</a>
+          <a href="#">eepss</a>
+          <a href="#">aptbid4U</a>
+          <a href="#">PerfectPay</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">ⓒ INOGARD. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Header scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Scroll animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
